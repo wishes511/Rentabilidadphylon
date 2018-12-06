@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="555" pageHeight="802" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="7ffa27ba-2ad9-47d9-8a1e-ddeb5efb9d66">
+	<property name="ireport.zoom" value="1.9487171000000019"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="f1" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="f2" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nombre" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="linea" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\GATEWAY1-\\Documents\\NetBeansProjects\\Rentabilidadphylon\\src\\report\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select cost.Id_Producto,df.corrida,p.descripcion
+from facturas f
+join DFacturas df on df.Factura=f.Factura
+join Lineas l on df.Linea = l.linea
+join RACobranzaPhylon.dbo.Clientes c on f.numcliente=c.NumCliente
+join RCPTPhylon.dbo.costossuela cs on l.Linea=cs.suela
+join ProduccionPhy.dbo.Costos cost on df.Producto=cost.id_productoRCPT
+join ProduccionPhy.dbo.Producto p on cost.id_Producto=p.id_producto
+where (f.estatus='R' or f.estatus='C') and Nombre = $P{nombre} and  L.Descripcion=$P{linea}
+ and CONVERT(date,f.fecha) between $P{f1} and $P{f2}
+ group by cost.id_producto,df.corrida,p.descripcion]]>
+	</queryString>
+	<field name="Id_Producto" class="java.lang.Short"/>
+	<field name="corrida" class="java.lang.Short"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<subreport>
+				<reportElement x="31" y="11" width="524" height="3" uuid="afd55e07-f152-467a-8a03-565c351ca7bb"/>
+				<subreportParameter name="f1">
+					<subreportParameterExpression><![CDATA[$P{f1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="producto">
+					<subreportParameterExpression><![CDATA[$F{Id_Producto}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="f2">
+					<subreportParameterExpression><![CDATA[$P{f2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombre">
+					<subreportParameterExpression><![CDATA[$P{nombre}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="linea">
+					<subreportParameterExpression><![CDATA[$P{linea}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "punto_detalle.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement x="26" y="0" width="26" height="11" uuid="8df20222-7aa8-4c23-aaf8-e90d1a7b7d02"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Id_Producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="52" y="0" width="74" height="11" uuid="10e33278-858a-4f30-ad90-0694aab824d4"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="126" y="0" width="44" height="11" uuid="bc6d822b-ba43-459d-97d8-1299cc23099f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{corrida}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

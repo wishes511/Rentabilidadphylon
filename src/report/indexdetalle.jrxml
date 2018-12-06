@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="67d312c1-c93b-45de-b288-e6f7dc979a52">
+	<property name="ireport.zoom" value="1.6105100000000014"/>
+	<property name="ireport.x" value="37"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="f1" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="f2" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nombre" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\gateway1-\\Documents\\NetBeansProjects\\Rentabilidadphylon\\src\\report\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select nombre from facturas f
+join RACobranzaPhylon.dbo.Clientes c on f.numcliente=c.NumCliente
+where (f.estatus='R' or f.estatus='C') and Nombre like '%$P!{nombre}%' and CONVERT(date,fecha) between $P{f1} and $P{f2}
+group by nombre]]>
+	</queryString>
+	<field name="nombre" class="java.lang.String"/>
+	<variable name="pares" class="java.lang.Float" calculation="Sum"/>
+	<variable name="precio" class="java.lang.Float" calculation="Sum"/>
+	<variable name="vtaneta" class="java.lang.Float" calculation="Sum"/>
+	<variable name="costo" class="java.lang.Float" calculation="Sum"/>
+	<variable name="costotot" class="java.lang.Float" calculation="Sum"/>
+	<variable name="gastos" class="java.lang.Float" calculation="Sum"/>
+	<variable name="costoneto" class="java.lang.Float" calculation="Sum"/>
+	<variable name="utilidad" class="java.lang.Float" calculation="Sum"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="419" y="0" width="136" height="20" uuid="da5c47a6-6af5-4f74-b649-9bce1d97b88b"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="188" y="44" width="100" height="20" uuid="39e9222f-b62c-486b-9295-78a2c743d417"/>
+				<text><![CDATA[detalle]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="4" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="11" forecolor="#FFFFFF" backcolor="#0066FF" uuid="e49d0efd-acaf-4d33-9b32-61eec5bb026b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="152" y="0" width="63" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="353125e5-0a90-4e69-91e5-334f1c6594f0"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vta Nta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="0" width="43" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="3765bc0c-c04e-46aa-9582-dbf1fead8425"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Costo Tot]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="311" y="0" width="39" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="96d2dc27-619b-45b8-8100-8b94e95744a6"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gastos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="0" width="41" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="f1169099-310b-481e-97e4-b26b5ed27d34"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Costo Nto.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="391" y="0" width="66" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="939dc578-84f9-4102-b67e-3be297d175c7"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Utilidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="457" y="0" width="52" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="52ead0da-1ded-462b-92ae-1c8f0d14685e"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[% Util]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="118" y="0" width="34" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="c51548ab-9379-4228-916c-50d4d09523eb"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="81" y="0" width="37" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="07cb92ac-054f-4cbe-94f5-b5420608c4b0"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pares]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="53" y="0" width="28" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="f938bb3e-4c82-48d0-80f2-7c7ccb18d4ea"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Punto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="0" width="53" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="fafb2d9f-0599-4811-9f42-d2f761cae5bd"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Costo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="15" uuid="11ee8472-d42a-40d3-8f88-a18248f2bc7e"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="0" y="15" width="555" height="11" uuid="077e0f8b-e6e5-433b-a0de-793c88903690"/>
+				<subreportParameter name="f1">
+					<subreportParameterExpression><![CDATA[$P{f1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="f2">
+					<subreportParameterExpression><![CDATA[$P{f2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombre">
+					<subreportParameterExpression><![CDATA[$F{nombre}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "head_detalle.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="20" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17" splitType="Stretch">
+			<textField>
+				<reportElement x="225" y="0" width="80" height="13" uuid="d9135fce-f2e6-4290-bab7-d948f5a2fea2"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="305" y="0" width="40" height="13" uuid="6e61f244-d820-4131-9c26-03b12ef65393"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="33" splitType="Stretch"/>
+	</summary>
+</jasperReport>
