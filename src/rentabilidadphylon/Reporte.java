@@ -308,13 +308,13 @@ public class Reporte extends javax.swing.JInternalFrame {
 //                parametros.put("mo", Float.parseFloat(mo));
 //                //System.out.println(df.format(f1.getDate()) + "-" + df.format(f2.getDate()) + "-" + nombre + "-" + tipo + tiporeporte + ".jasper");
             Producto pdb = new Producto();
-            int data = 1024*1024;
-            Runtime run = Runtime.getRuntime();
-            System.out.println(run.maxMemory()/data+"-"+run.totalMemory()/data);
+            //int data = 1024*1024;
+            //Runtime run = Runtime.getRuntime();
+            //System.out.println(run.maxMemory()/data+"-"+run.totalMemory()/data);
             JasperReport jasper = (JasperReport) JRLoader.loadObject(getClass().getResource(tipo + tiporeporte + ".jasper"));
             JasperPrint print = JasperFillManager.fillReport(jasper, parametross, pdb.getconexion());
             JasperViewer ver = new JasperViewer(print, false); //despliegue de reporte
-            System.out.println(run.maxMemory()/data+"-"+run.totalMemory()/data);
+            //System.out.println(run.maxMemory()/data+"-"+run.totalMemory()/data);
             ver.setTitle("Rentabilidad");
             ver.setVisible(true);
         } catch (NullPointerException e) {
