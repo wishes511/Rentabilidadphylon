@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="67d312c1-c93b-45de-b288-e6f7dc979a52">
-	<property name="ireport.zoom" value="1.9487171000000019"/>
+	<property name="ireport.zoom" value="1.210000000000001"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="40"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="f1" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -16,12 +16,15 @@
 		<defaultValueExpression><![CDATA["C:\\Users\\gateway1-\\Documents\\NetBeansProjects\\Rentabilidadphylon\\src\\report\\"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select nombre from facturas f
+		<![CDATA[select nombre,c.numcliente,sum(totalpares) as 'pares' from facturas f
 join RACobranzaPhylon.dbo.Clientes c on f.numcliente=c.NumCliente
 where (f.estatus='R' or f.estatus='C') and Nombre like '%$P!{nombre}%' and CONVERT(date,fecha) between $P{f1} and $P{f2}
-group by nombre]]>
+group by nombre,c.numcliente
+order by pares DESC]]>
 	</queryString>
 	<field name="nombre" class="java.lang.String"/>
+	<field name="numcliente" class="java.lang.Short"/>
+	<field name="pares" class="java.lang.Integer"/>
 	<variable name="pares" class="java.lang.Float" calculation="Sum"/>
 	<variable name="precio" class="java.lang.Float" calculation="Sum"/>
 	<variable name="vtaneta" class="java.lang.Float" calculation="Sum"/>
@@ -38,6 +41,45 @@ group by nombre]]>
 			<textField pattern="EEEEE dd MMMMM yyyy">
 				<reportElement x="419" y="0" width="136" height="20" uuid="da5c47a6-6af5-4f74-b649-9bce1d97b88b"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="13" y="20" width="138" height="40" uuid="899b4cb4-f4cb-4b0e-a100-5bd5db0b2060"/>
+				<imageExpression><![CDATA["C:\\af\\Rentabilidad\\images\\top.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="172" y="0" width="211" height="30" uuid="e02abc06-5e65-4aab-813f-bb85f795676b"/>
+				<textElement textAlignment="Center">
+					<font size="17" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de rentabilidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="30" width="30" height="30" uuid="58aa8f3a-7017-4c36-ad71-3bdc2fb7dc99"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Del]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="194" y="30" width="95" height="30" uuid="81d15112-788a-4b31-bb9c-6117ae4f6186"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{f1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="289" y="30" width="20" height="30" uuid="148212a8-6b89-45fc-b47b-97fd1db82d3b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Al]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="309" y="30" width="95" height="30" uuid="43426ec2-1330-4742-afce-e6f264a7a738"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{f2}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>

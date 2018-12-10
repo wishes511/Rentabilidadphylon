@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="555" pageHeight="802" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ce6cf3bd-6f73-4b59-9edb-7c9a9e485419">
 	<property name="ireport.zoom" value="1.9487171000000065"/>
-	<property name="ireport.x" value="210"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="f1" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -20,9 +20,14 @@
 join DFacturas df on df.Factura=f.Factura
 join Lineas l on df.Linea = l.linea
 join RACobranzaPhylon.dbo.Clientes c on f.numcliente=c.NumCliente
+join productos p on df.producto=p.producto
+join ProduccionPhy.dbo.Costos cost on df.Producto=cost.id_productoRCPT
+join ProduccionPhy.dbo.Producto pr on cost.id_Producto=pr.id_producto
+join CmpPhylon.dbo.Materiales cp on cost.cvemat=cp.cvemat
+join ProduccionPhy.dbo.Gastos g on year(f.fecha)=g.año and month(f.fecha)=g.mes
 where (f.estatus='R' or f.estatus='C') and Nombre = $P{nombre}
  and CONVERT(date,f.fecha) between $P{f1} and $P{f2}
-group by Descripcion]]>
+group by l.Descripcion]]>
 	</queryString>
 	<field name="Descripcion" class="java.lang.String"/>
 	<variable name="pares" class="java.lang.Integer"/>
