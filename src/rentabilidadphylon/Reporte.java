@@ -290,7 +290,7 @@ public class Reporte extends javax.swing.JInternalFrame {
 
     private void setreport() {
         String nombre = (all1.isSelected()) ? "" : combo.getSelectedItem().toString();
-        String tipo = (t1.isSelected()) ? "..\\report\\index" : (t2.isSelected()) ? "..\\report\\indexAg" : "..\\report\\indexlin";
+        String tipo = (t1.isSelected()) ? "index" : (t2.isSelected()) ? "indexAg" : "indexlin";
         String tiporeporte = (t4.isSelected()) ? "" : "detalle";
         try {
             ConcurrentHashMap parametross = new ConcurrentHashMap();
@@ -298,7 +298,7 @@ public class Reporte extends javax.swing.JInternalFrame {
             parametross.put("f2", df.format(f2.getDate()));
             parametross.put("nombre", nombre);
             Producto pdb = new Producto();
-            System.out.println(tipo+tiporeporte);
+            //System.out.println(tipo+tiporeporte);
             JasperReport jasper = (JasperReport) JRLoader.loadObject(getClass().getResource(tipo + tiporeporte + ".jasper"));
             JasperPrint print = JasperFillManager.fillReport(jasper, parametross, pdb.getconexion());
             JasperViewer ver = new JasperViewer(print, false); //despliegue de reporte

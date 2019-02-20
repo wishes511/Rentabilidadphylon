@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="555" pageHeight="802" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3939741b-4005-4578-be0c-df4953904561">
+	<property name="ireport.zoom" value="1.652892561983471"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="f1" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="f2" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nombre" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="linea" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="producto" class="java.lang.Short">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="punto" class="java.lang.Short">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\GATEWAY1-\\Documents\\NetBeansProjects\\Rentabilidadphylon\\src\\report\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="pares" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select 
+case when $P{pares}=0 then 0 when (salida =0 and $P{pares}!=0) then max(df.precio) when (salida is NULL and $P{pares}!=0) then max(df.precio) else (max(df.precio)/0.16) end as 'precio',
+case when $P{pares}=0 then 0 else (cost.pesogr+cost.Tolerancia+cost.Colada)*cp.Costocosteo end as 'costo',
+case when $P{pares}=0 then 0 else sum(g.mo+g.gf+g.ga+g.mi) end as 'gastos'
+
+
+from facturas f
+join DFacturas df on df.Factura=f.Factura
+join Lineas l on df.Linea = l.linea
+join RACobranzaPhylon.dbo.Clientes c on f.numcliente=c.NumCliente
+join ProduccionPhy.dbo.Costos cost on df.Producto=cost.id_productoRCPT
+join ProduccionPhy.dbo.Producto p on cost.id_Producto=p.id_producto
+join CmpPhylon.dbo.Materiales cp on cost.cvemat=cp.cvemat
+join ProduccionPhy.dbo.Gastos g on year(f.fecha)=g.año and month(f.fecha)=g.mes
+where (f.estatus='F') and Nombre = $P{nombre} and L.Descripcion=$P{linea} and cost.id_producto=$P{producto}
+and cost.punto =$P{punto} and CONVERT(date,f.fecha) between $P{f1} and $P{f2}
+ group by f.descuento,salida,pesogr,tolerancia,colada,costocosteo]]>
+	</queryString>
+	<field name="precio" class="java.math.BigDecimal"/>
+	<field name="costo" class="java.math.BigDecimal"/>
+	<field name="gastos" class="java.math.BigDecimal"/>
+	<variable name="pareso" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$P{pares}]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="precioso" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{precio}]]></variableExpression>
+	</variable>
+	<variable name="vtanetaso" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$P{pares}*$F{precio}.floatValue()]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="costoso" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{costo}]]></variableExpression>
+	</variable>
+	<variable name="costotaleso" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$P{pares}*$F{costo}.floatValue()]]></variableExpression>
+	</variable>
+	<variable name="gastoso" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{gastos}]]></variableExpression>
+	</variable>
+	<variable name="costnetoso" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[($P{pares}*$F{costo}.floatValue())+$F{gastos}.floatValue()]]></variableExpression>
+	</variable>
+	<variable name="utilidadeso" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[($P{pares}*$F{precio}.floatValue()) -(($P{pares}*$F{costo}.floatValue())+$F{gastos}.floatValue())]]></variableExpression>
+	</variable>
+	<detail>
+		<band height="11">
+			<textField pattern="#,##0.00">
+				<reportElement x="88" y="0" width="34" height="11" uuid="c95f4ca0-90a9-4877-b408-ac64efb8ccbc"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="27" y="0" width="24" height="11" uuid="8ce70c31-5ce3-4f5f-9c9a-fc837fbcb541"/>
+				<textElement verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{punto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="122" y="0" width="63" height="11" uuid="6fac636a-c0e3-4a4d-bfdd-b6efecc7e435"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pares}*$F{precio}.floatValue()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="185" y="0" width="53" height="11" uuid="ed120797-5d6c-47ba-8428-9adfd49d9f5d"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{costo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="238" y="0" width="43" height="11" uuid="ed78aa34-b778-4bef-a1e8-6ac05cc0ea7a"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pares}*$F{costo}.floatValue()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="281" y="0" width="39" height="11" uuid="5321b7ad-f642-4151-8324-1e4cc58dfb7c"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gastos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="320" y="0" width="41" height="11" uuid="044326fd-5629-4bdd-80f0-c26f61e8a22c"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{pares}*$F{costo}.floatValue())+$F{gastos}.floatValue()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="361" y="0" width="66" height="11" uuid="ba80a0f0-c840-47aa-8737-9f3cdbb65889"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($P{pares}*$F{precio}.floatValue()) -(($P{pares}*$F{costo}.floatValue())+$F{gastos}.floatValue())]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="427" y="0" width="39" height="11" uuid="fcd471a2-6abb-4c35-b72c-77e77f408609"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[((($P{pares}*$F{precio}.floatValue()) -(($P{pares}*$F{costo}.floatValue())+$F{gastos}.floatValue()))/($P{pares}*$F{precio}.floatValue()))*100]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="466" y="0" width="14" height="11" uuid="46c5a245-6cd3-4baa-a102-6dc644324a5c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="51" y="0" width="37" height="11" uuid="505a71d6-73e3-42d5-a5b5-4a5d598c0741"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pares}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
