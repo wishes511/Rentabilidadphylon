@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="555" pageHeight="802" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="7ffa27ba-2ad9-47d9-8a1e-ddeb5efb9d66">
-	<property name="ireport.zoom" value="1.9487171000000019"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.zoom" value="3.138428376721007"/>
+	<property name="ireport.x" value="19"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="f1" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -19,21 +19,31 @@
 		<defaultValueExpression><![CDATA["C:\\Users\\GATEWAY1-\\Documents\\NetBeansProjects\\Rentabilidadphylon\\src\\report\\"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select cost.Id_Producto,df.corrida,p.descripcion
+		<![CDATA[select cost.Id_Producto,df.corrida,p.descripcion,cor.descripcion as 'desc'
 from facturas f
 join DFacturas df on df.Factura=f.Factura
 join Lineas l on df.Linea = l.linea
+join corridas cor on df.corrida=cor.corrida
 join RACobranzaPhylon.dbo.Clientes c on f.numcliente=c.NumCliente
 join RCPTPhylon.dbo.costossuela cs on l.Linea=cs.suela
 join ProduccionPhy.dbo.Costos cost on df.Producto=cost.id_productoRCPT
 join ProduccionPhy.dbo.Producto p on cost.id_Producto=p.id_producto
-where (f.estatus='R' or f.estatus='C') and Nombre = $P{nombre} and  L.Descripcion=$P{linea}
+where (f.estatus='F') and Nombre = $P{nombre} and  L.Descripcion=$P{linea}
  and CONVERT(date,f.fecha) between $P{f1} and $P{f2}
- group by cost.id_producto,df.corrida,p.descripcion]]>
+ group by cost.id_producto,df.corrida,p.descripcion,cor.descripcion]]>
 	</queryString>
 	<field name="Id_Producto" class="java.lang.Short"/>
 	<field name="corrida" class="java.lang.Short"/>
 	<field name="descripcion" class="java.lang.String"/>
+	<field name="desc" class="java.lang.String"/>
+	<variable name="pareso" class="java.lang.Short" calculation="Sum"/>
+	<variable name="precioso" class="java.lang.Float" calculation="Sum"/>
+	<variable name="vtanetaso" class="java.lang.Float" calculation="Sum"/>
+	<variable name="costoso" class="java.lang.Float" calculation="Sum"/>
+	<variable name="costotalso" class="java.lang.Float" calculation="Sum"/>
+	<variable name="gastoso" class="java.lang.Float" calculation="Sum"/>
+	<variable name="costnetoso" class="java.lang.Float" calculation="Sum"/>
+	<variable name="utilidadeso" class="java.lang.Float" calculation="Sum"/>
 	<detail>
 		<band height="14" splitType="Stretch">
 			<subreport>
@@ -54,15 +64,16 @@ where (f.estatus='R' or f.estatus='C') and Nombre = $P{nombre} and  L.Descripcio
 					<subreportParameterExpression><![CDATA[$P{linea}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="pares" toVariable="pareso"/>
+				<returnValue subreportVariable="vtanetas" toVariable="vtanetaso"/>
+				<returnValue subreportVariable="precios" toVariable="precioso"/>
+				<returnValue subreportVariable="costos" toVariable="costoso"/>
+				<returnValue subreportVariable="costotals" toVariable="costotalso"/>
+				<returnValue subreportVariable="gastos" toVariable="gastoso"/>
+				<returnValue subreportVariable="costnetos" toVariable="costnetoso"/>
+				<returnValue subreportVariable="utilidades" toVariable="utilidadeso"/>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "punto_detalle.jasper"]]></subreportExpression>
 			</subreport>
-			<textField>
-				<reportElement x="26" y="0" width="26" height="11" uuid="8df20222-7aa8-4c23-aaf8-e90d1a7b7d02"/>
-				<textElement>
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{Id_Producto}]]></textFieldExpression>
-			</textField>
 			<textField>
 				<reportElement x="52" y="0" width="74" height="11" uuid="10e33278-858a-4f30-ad90-0694aab824d4"/>
 				<textElement>
@@ -71,12 +82,86 @@ where (f.estatus='R' or f.estatus='C') and Nombre = $P{nombre} and  L.Descripcio
 				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="126" y="0" width="44" height="11" uuid="bc6d822b-ba43-459d-97d8-1299cc23099f"/>
-				<textElement>
+				<reportElement x="126" y="0" width="61" height="11" uuid="2ddeb101-c71c-46c5-881e-791eef9694e3"/>
+				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{corrida}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{desc}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="53" y="10" width="134" height="1" uuid="15a8eba9-fe7b-449b-ae44-eecf9170c2f8"/>
+			</line>
+		</band>
+		<band height="12">
+			<textField pattern="#,##0">
+				<reportElement x="82" y="1" width="37" height="9" uuid="acd91fba-861f-4276-bca7-08378b819242"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{pareso}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="153" y="1" width="63" height="9" uuid="8030270d-ba5c-4714-b3ae-6aacef2b686c"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vtanetaso}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="119" y="1" width="34" height="9" uuid="6504fbec-3876-4f21-9fca-32c539a90324"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{precioso}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="216" y="1" width="53" height="9" uuid="ab8d9c64-8175-4c9d-9a77-250926a93ae7"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{costoso}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="269" y="1" width="43" height="9" uuid="2c7b257b-ecb1-484d-a89a-ea7a0e381585"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{costotalso}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="312" y="1" width="39" height="9" uuid="5a52c760-ebf8-4202-9b0d-62de192f5041"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{gastoso}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="351" y="1" width="41" height="9" uuid="b066b956-b988-4e8c-bc97-712566a89627"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{costnetoso}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="392" y="1" width="66" height="9" uuid="0b99a9ba-ef52-4d03-be33-848dad3fa402"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{utilidadeso}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="6e6a377e-d8af-49db-a17b-f27ae7a3449e"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="52" y="1" width="30" height="9" uuid="b3361bf1-b81e-4a5e-b6dc-ea745eb44daf"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total:     ]]></text>
+			</staticText>
 		</band>
 	</detail>
 </jasperReport>

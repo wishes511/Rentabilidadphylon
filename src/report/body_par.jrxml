@@ -30,12 +30,11 @@ join DFacturas df on df.Factura=f.Factura
 join Lineas l on df.Linea = l.linea
 join RACobranzaPhylon.dbo.Clientes c on f.numcliente=c.NumCliente
 join productos p on df.producto=p.producto
-join RCPTPhylon.dbo.costossuela cs on l.Linea=cs.suela
 join ProduccionPhy.dbo.Costos cost on df.Producto=cost.id_productoRCPT
 join ProduccionPhy.dbo.Producto pr on cost.id_Producto=pr.id_producto
 join CmpPhylon.dbo.Materiales cp on cost.cvemat=cp.cvemat
 join ProduccionPhy.dbo.Gastos g on year(f.fecha)=g.año and month(f.fecha)=g.mes
-where (f.estatus='R' or f.estatus='C') and Nombre = $P{nombre} and L.Descripcion=$P{linea}
+where (f.estatus='F') and Nombre = $P{nombre} and L.Descripcion=$P{linea} and year(df.fecha)=year($P{f1})
  and CONVERT(date,f.fecha) between $P{f1} and $P{f2}]]>
 	</queryString>
 	<field name="Costo" class="java.math.BigDecimal"/>
@@ -44,7 +43,7 @@ where (f.estatus='R' or f.estatus='C') and Nombre = $P{nombre} and L.Descripcion
 		<variableExpression><![CDATA[$F{Costo}]]></variableExpression>
 		<initialValueExpression><![CDATA[$F{Costo}]]></initialValueExpression>
 	</variable>
-	<variable name="pares" class="java.lang.Integer"/>
+	<variable name="pares" class="java.lang.Integer" calculation="Sum"/>
 	<variable name="precios" class="java.lang.Float"/>
 	<variable name="vtanetas" class="java.lang.Float"/>
 	<variable name="costos" class="java.lang.Float"/>

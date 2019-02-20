@@ -18,7 +18,7 @@
 	<queryString>
 		<![CDATA[select nombre from facturas f
 join RACobranzaPhylon.dbo.Clientes c on f.numcliente=c.NumCliente
-where (f.estatus='R' or f.estatus='C') and Nombre like '%$P!{nombre}%' and CONVERT(date,fecha) between $P{f1} and $P{f2}
+where (f.estatus='F') and Nombre like '%$P!{nombre}%' and CONVERT(date,fecha) between $P{f1} and $P{f2}
 group by nombre]]>
 	</queryString>
 	<field name="nombre" class="java.lang.String"/>
@@ -40,7 +40,7 @@ group by nombre]]>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="131" y="10" width="288" height="30" uuid="74b9e63e-dc6c-4185-955e-91fca1e0554c"/>
+				<reportElement x="154" y="10" width="249" height="30" uuid="74b9e63e-dc6c-4185-955e-91fca1e0554c"/>
 				<textElement textAlignment="Center">
 					<font size="15" isBold="true"/>
 				</textElement>
@@ -162,10 +162,6 @@ group by nombre]]>
 	</columnHeader>
 	<detail>
 		<band height="30" splitType="Stretch">
-			<textField>
-				<reportElement x="0" y="0" width="100" height="15" uuid="11ee8472-d42a-40d3-8f88-a18248f2bc7e"/>
-				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
-			</textField>
 			<subreport>
 				<reportElement x="0" y="15" width="555" height="11" uuid="077e0f8b-e6e5-433b-a0de-793c88903690"/>
 				<subreportParameter name="f1">
@@ -180,6 +176,16 @@ group by nombre]]>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "head_detalle.jasper"]]></subreportExpression>
 			</subreport>
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="15" forecolor="#FFFFFF" backcolor="#0066FF" uuid="9469f606-97d4-4554-bdb7-2b80acc3d924"/>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="0" width="100" height="15" forecolor="#FFFFFF" uuid="11ee8472-d42a-40d3-8f88-a18248f2bc7e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>

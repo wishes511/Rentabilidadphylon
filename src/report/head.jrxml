@@ -16,7 +16,7 @@
 		<defaultValueExpression><![CDATA["C:\\Users\\gateway1-\\Documents\\NetBeansProjects\\Rentabilidadphylon\\src\\report\\"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select l.Descripcion from facturas f
+		<![CDATA[select l.Descripcion,sum(df.totalpares) as 'pares' from facturas f
 join DFacturas df on df.Factura=f.Factura
 join Lineas l on df.Linea = l.linea
 join RACobranzaPhylon.dbo.Clientes c on f.numcliente=c.NumCliente
@@ -25,19 +25,21 @@ join ProduccionPhy.dbo.Costos cost on df.Producto=cost.id_productoRCPT
 join ProduccionPhy.dbo.Producto pr on cost.id_Producto=pr.id_producto
 join CmpPhylon.dbo.Materiales cp on cost.cvemat=cp.cvemat
 join ProduccionPhy.dbo.Gastos g on year(f.fecha)=g.año and month(f.fecha)=g.mes
-where (f.estatus='R' or f.estatus='C') and Nombre = $P{nombre}
+where (f.estatus='F') and Nombre = $P{nombre} and year(df.fecha)=year($P{f1})
  and CONVERT(date,f.fecha) between $P{f1} and $P{f2}
-group by l.Descripcion]]>
+group by l.Descripcion
+order by pares desc]]>
 	</queryString>
 	<field name="Descripcion" class="java.lang.String"/>
-	<variable name="pares" class="java.lang.Integer"/>
-	<variable name="precios" class="java.lang.Float"/>
-	<variable name="vtanetas" class="java.lang.Float"/>
-	<variable name="costos" class="java.lang.Float"/>
-	<variable name="costotots" class="java.lang.Float"/>
-	<variable name="gastos" class="java.lang.Float"/>
-	<variable name="costonetos" class="java.lang.Float"/>
-	<variable name="utilidads" class="java.lang.Float"/>
+	<field name="pares" class="java.lang.Integer"/>
+	<variable name="pares" class="java.lang.Integer" calculation="Sum"/>
+	<variable name="precios" class="java.lang.Float" calculation="Sum"/>
+	<variable name="vtanetas" class="java.lang.Float" calculation="Sum"/>
+	<variable name="costos" class="java.lang.Float" calculation="Sum"/>
+	<variable name="costotots" class="java.lang.Float" calculation="Sum"/>
+	<variable name="gastos" class="java.lang.Float" calculation="Sum"/>
+	<variable name="costonetos" class="java.lang.Float" calculation="Sum"/>
+	<variable name="utilidads" class="java.lang.Float" calculation="Sum"/>
 	<variable name="costosub" class="java.math.BigDecimal" calculation="Sum"/>
 	<variable name="gastosub" class="java.math.BigDecimal"/>
 	<detail>
@@ -67,66 +69,16 @@ group by l.Descripcion]]>
 					<subreportParameterExpression><![CDATA[$F{Descripcion}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="pares" toVariable="pares" calculation="Sum"/>
+				<returnValue subreportVariable="precios" toVariable="precios" calculation="Sum"/>
+				<returnValue subreportVariable="vtanetas" toVariable="vtanetas" calculation="Sum"/>
+				<returnValue subreportVariable="costos" toVariable="costos" calculation="Sum"/>
+				<returnValue subreportVariable="costotots" toVariable="costotots" calculation="Sum"/>
+				<returnValue subreportVariable="gastos" toVariable="gastos" calculation="Sum"/>
+				<returnValue subreportVariable="costonetos" toVariable="costonetos" calculation="Sum"/>
+				<returnValue subreportVariable="utilidads" toVariable="utilidads" calculation="Sum"/>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "body_par.jasper"]]></subreportExpression>
 			</subreport>
-		</band>
-		<band height="10">
-			<textField pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="166" y="0" width="30" height="8" uuid="0cd01651-c0ac-4bc0-abdf-770d3d6c1f7e"/>
-				<textElement textAlignment="Center">
-					<font size="6" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{pares}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="238" y="0" width="49" height="8" uuid="ac0faf1d-2821-4d7e-aef3-1b86a13bd581"/>
-				<textElement textAlignment="Center">
-					<font size="6" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{vtanetas}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="287" y="0" width="49" height="8" uuid="23ef949a-a79a-4bc3-866c-4545ea80820d"/>
-				<textElement textAlignment="Center">
-					<font size="6" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{costos}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="336" y="0" width="49" height="8" uuid="56c502e9-6d54-4ee7-a90b-05fc180d2a4f"/>
-				<textElement textAlignment="Center">
-					<font size="6" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{costotots}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="385" y="0" width="49" height="8" uuid="9846b7d5-0a16-499f-9eca-9bfe470f4cf3"/>
-				<textElement textAlignment="Center">
-					<font size="6" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{gastos}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="434" y="0" width="49" height="8" uuid="f6a991dd-dc6d-4cf3-ae63-19ac718e594d"/>
-				<textElement textAlignment="Center">
-					<font size="6" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{costonetos}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="483" y="0" width="49" height="8" uuid="8cdd3ece-7068-4a04-accd-4d50acd76f86"/>
-				<textElement textAlignment="Center">
-					<font size="6" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{utilidads}]]></textFieldExpression>
-			</textField>
-			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="196" y="0" width="42" height="8" uuid="67ad6c92-b1cc-4df6-ba80-926c17fca2b9"/>
-				<textElement textAlignment="Center">
-					<font size="6" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{precios}]]></textFieldExpression>
-			</textField>
 		</band>
 	</detail>
 </jasperReport>

@@ -20,6 +20,7 @@ public class index extends javax.swing.JFrame {
     public index() {
         super("Rentabilidad Top Suelas");
         initComponents();
+        jMenu1.setEnabled(false);
         this.setLocationRelativeTo(null);
         this.setIconImage(new ImageIcon(getClass().getResource("/validacion/icono.png")).getImage());
         m4.setToolTipText("Salir");

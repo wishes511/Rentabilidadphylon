@@ -20,9 +20,9 @@
 join DFacturas df on df.Factura=f.Factura
 join Lineas l on df.Linea = l.linea
 join RACobranzaPhylon.dbo.Clientes c on f.numcliente=c.NumCliente
-where (f.estatus='R' or f.estatus='C') and Nombre = $P{nombre}
+where (f.estatus='F') and Nombre = $P{nombre}
  and CONVERT(date,f.fecha) between $P{f1} and $P{f2}
-group by Descripcion]]>
+group by l.Descripcion]]>
 	</queryString>
 	<field name="Descripcion" class="java.lang.String"/>
 	<variable name="pares" class="java.lang.Integer"/>

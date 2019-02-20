@@ -11,7 +11,6 @@ import java.sql.Connection;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
-import javafx.concurrent.Task;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -33,13 +32,8 @@ public class Reporte extends javax.swing.JInternalFrame {
     public ButtonGroup bg2 = new ButtonGroup();
     public ButtonGroup bg3 = new ButtonGroup();
     DateFormat df = DateFormat.getDateInstance();
-    Task tas;
     DefaultComboBoxModel modelo;
-    validar v = new validar();
 
-    /**
-     * Creates new form dashboard
-     */
     public Reporte() {
         super("Reporte de Rentabilidad");
         initComponents();
@@ -303,23 +297,18 @@ public class Reporte extends javax.swing.JInternalFrame {
             parametross.put("f1", df.format(f1.getDate()));
             parametross.put("f2", df.format(f2.getDate()));
             parametross.put("nombre", nombre);
-//                parametros.put("ga", Float.parseFloat(ga));
-//                parametros.put("gf", Float.parseFloat(gf));
-//                parametros.put("mo", Float.parseFloat(mo));
-//                //System.out.println(df.format(f1.getDate()) + "-" + df.format(f2.getDate()) + "-" + nombre + "-" + tipo + tiporeporte + ".jasper");
             Producto pdb = new Producto();
-            //int data = 1024*1024;
-            //Runtime run = Runtime.getRuntime();
-            //System.out.println(run.maxMemory()/data+"-"+run.totalMemory()/data);
+            System.out.println(tipo+tiporeporte);
             JasperReport jasper = (JasperReport) JRLoader.loadObject(getClass().getResource(tipo + tiporeporte + ".jasper"));
             JasperPrint print = JasperFillManager.fillReport(jasper, parametross, pdb.getconexion());
             JasperViewer ver = new JasperViewer(print, false); //despliegue de reporte
-            //System.out.println(run.maxMemory()/data+"-"+run.totalMemory()/data);
+            
             ver.setTitle("Rentabilidad");
             ver.setVisible(true);
         } catch (NullPointerException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "No puedes dejar las fechas vacias!, Verificalo.");
+            JOptionPane.showMessageDialog(null, e.getCause()+e.getMessage());
             f1.requestFocus();
         } catch (net.sf.jasperreports.engine.JRException es) {
             JOptionPane.showMessageDialog(null, "Error con algunos de los archivos para la generación del reporte.");
@@ -329,11 +318,9 @@ public class Reporte extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error desconocido llame a un administrador.\n Causa del error: \n" + e);
             e.printStackTrace();
         }
-
     }
 
     public void llenacombo() {
-
         Reportes r = new Reportes();
         String tabla = (t1.isSelected()) ? "Clientes" : (t2.isSelected()) ? "Agentes" : "Lineas";
         String campo = (t3.isSelected()) ? "Descripcion" : "Nombre";
