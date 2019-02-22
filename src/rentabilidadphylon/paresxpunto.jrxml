@@ -22,7 +22,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:\\Users\\GATEWAY1-\\Documents\\NetBeansProjects\\Rentabilidadphylon\\src\\report\\"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["C:\\Users\\GATEWAY1-\\Documents\\NetBeansProjects\\Rentabilidadphylon\\src\\rentabilidadphylon\\"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[--- subreporte pares por punto y corrida v2
@@ -49,10 +49,9 @@ from facturas f
 join DFacturas dp on dp.Factura=f.Factura
 join Lineas l on dp.Linea = l.linea
 join RACobranzaPhylon.dbo.Clientes c on f.numcliente=c.NumCliente
-join RCPTPhylon.dbo.costossuela cs on l.Linea=cs.suela
 join ProduccionPhy.dbo.Costos cost on dp.Producto=cost.id_productoRCPT
 join ProduccionPhy.dbo.Producto p on cost.id_Producto=p.id_producto
-where (f.estatus='F') and Nombre = $P{nombre} and L.Descripcion=$P{linea} and cost.id_producto=$P{producto}
+where (f.estatus='F') and Nombre = $P{nombre} and L.Descripcion=$P{linea} and cost.id_producto=$P{producto} and year(dp.fecha)=year($P{f1})
 and cost.punto =$P{punto}
  and CONVERT(date,f.fecha) between $P{f1} and $P{f2}
  group by cost.punto,dp.corrida]]>

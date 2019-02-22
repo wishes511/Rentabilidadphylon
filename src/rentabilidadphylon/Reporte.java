@@ -7,12 +7,14 @@ package rentabilidadphylon;
 
 import DAO.Producto;
 import DAO.Reportes;
+import java.awt.Color;
 import java.sql.Connection;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import modelo.reporte;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -26,13 +28,14 @@ import validacion.validar;
  *
  * @author Michelon
  */
-public class Reporte extends javax.swing.JInternalFrame {
+public class Reporte extends javax.swing.JInternalFrame implements Runnable{
 
     public ButtonGroup bg = new ButtonGroup();
     public ButtonGroup bg2 = new ButtonGroup();
     public ButtonGroup bg3 = new ButtonGroup();
     DateFormat df = DateFormat.getDateInstance();
     DefaultComboBoxModel modelo;
+    int l=0;
 
     public Reporte() {
         super("Reporte de Rentabilidad");
@@ -50,6 +53,12 @@ public class Reporte extends javax.swing.JInternalFrame {
         bg2.add(all3);
         bg3.add(t4);
         bg3.add(t5);
+        loading.setVisible(false);
+        jp1.setVisible(false);
+        jp1.setOpaque(true);
+        jp1.setBackground( new Color(255, 255, 255, 150) );
+        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -57,6 +66,8 @@ public class Reporte extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
+        loading = new javax.swing.JLabel();
+        jp1 = new javax.swing.JPanel();
         f1 = new com.toedter.calendar.JDateChooser();
         f2 = new com.toedter.calendar.JDateChooser();
         all1 = new javax.swing.JRadioButton();
@@ -79,6 +90,12 @@ public class Reporte extends javax.swing.JInternalFrame {
         setTitle("Reporte de rentabilidad");
         setPreferredSize(new java.awt.Dimension(1028, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        loading.setIcon(new javax.swing.ImageIcon("C:\\af\\Rentabilidad\\images\\cargando.gif")); // NOI18N
+        getContentPane().add(loading, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 210, -1, -1));
+
+        jp1.setOpaque(false);
+        getContentPane().add(jp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 570));
 
         f1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         getContentPane().add(f1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 200, 30));
@@ -298,11 +315,18 @@ public class Reporte extends javax.swing.JInternalFrame {
             parametross.put("f2", df.format(f2.getDate()));
             parametross.put("nombre", nombre);
             Producto pdb = new Producto();
-            //System.out.println(tipo+tiporeporte);
+            //System.out.println(tipo+tiporeporte);    
+            jp1.setVisible(true);
+            loading.setVisible(true);
+            
+           //JOptionPane.showMessageDialog(null, "Cargando reporte espere pofavor...","Carga de reporte",JOptionPane.);
+            JOptionPane.showMessageDialog(null, "Cargando reporte espere pofavor...");
             JasperReport jasper = (JasperReport) JRLoader.loadObject(getClass().getResource(tipo + tiporeporte + ".jasper"));
             JasperPrint print = JasperFillManager.fillReport(jasper, parametross, pdb.getconexion());
             JasperViewer ver = new JasperViewer(print, false); //despliegue de reporte
-            
+            loading.setVisible(false);
+            jp1.setVisible(false);
+           // JOptionPane.showMessageDialog(null, "");
             ver.setTitle("Rentabilidad");
             ver.setVisible(true);
         } catch (NullPointerException e) {
@@ -345,6 +369,8 @@ public class Reporte extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JPanel jp1;
+    private javax.swing.JLabel loading;
     private org.edisoncor.gui.button.ButtonAero ok;
     private javax.swing.JRadioButton t1;
     private javax.swing.JRadioButton t2;
@@ -352,4 +378,11 @@ public class Reporte extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton t4;
     private javax.swing.JRadioButton t5;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        
+    
+    }
+
 }

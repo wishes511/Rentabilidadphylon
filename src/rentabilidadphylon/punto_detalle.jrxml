@@ -19,7 +19,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:\\Users\\GATEWAY1-\\Documents\\NetBeansProjects\\Rentabilidadphylon\\src\\report\\"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["C:\\Users\\GATEWAY1-\\Documents\\NetBeansProjects\\Rentabilidadphylon\\src\\rentabilidadphylon\\"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[select cost.punto
@@ -29,7 +29,7 @@ join Lineas l on df.Linea = l.linea
 join RACobranzaPhylon.dbo.Clientes c on f.numcliente=c.NumCliente
 join ProduccionPhy.dbo.Costos cost on df.Producto=cost.id_productoRCPT
 join ProduccionPhy.dbo.Producto p on cost.id_Producto=p.id_producto
-where (f.estatus='F') and Nombre = $P{nombre} and L.Descripcion=$P{linea} and cost.id_producto=$P{producto}
+where (f.estatus='F') and Nombre = $P{nombre} and L.Descripcion=$P{linea} and cost.id_producto=$P{producto} and year(df.fecha)=year($P{f1})
  and CONVERT(date,f.fecha) between $P{f1} and $P{f2}
  group by cost.punto]]>
 	</queryString>

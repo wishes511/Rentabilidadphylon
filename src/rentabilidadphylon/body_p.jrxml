@@ -26,7 +26,7 @@
 	</parameter>
 	<queryString>
 		<![CDATA[select p.Estilo,p.descripcion,sum(df.TotalPares) as 'pares',
-case when salida =0 then df.precio when salida is NULL then df.precio else (df.precio)/1.16 end as 'precio'
+case when max(salida) =0 then df.precio when max(salida) is NULL then df.precio else (df.precio)/1.16 end as 'precio'
 
 from facturas f
 join DFacturas df on df.Factura=f.Factura
@@ -35,7 +35,7 @@ join RACobranzaPhylon.dbo.Clientes c on f.numcliente=c.NumCliente
 join productos p on df.producto=p.producto
 where (f.estatus='F') and Nombre = $P{nombre} and L.Descripcion=$P{linea} and year(df.fecha)=year($P{f1})
  and CONVERT(date,f.fecha) between $P{f1} and $P{f2}
- group by p.estilo,p.descripcion,salida,df.precio
+ group by p.estilo,p.descripcion,df.precio
 order by pares]]>
 	</queryString>
 	<field name="Estilo" class="java.lang.Integer"/>
