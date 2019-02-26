@@ -334,13 +334,19 @@ public class Reporte extends javax.swing.JInternalFrame implements Runnable{
             JOptionPane.showMessageDialog(null, "No puedes dejar las fechas vacias!, Verificalo.");
             JOptionPane.showMessageDialog(null, e.getCause()+e.getMessage());
             f1.requestFocus();
+             loading.setVisible(false);
+            jp1.setVisible(false);
         } catch (net.sf.jasperreports.engine.JRException es) {
             JOptionPane.showMessageDialog(null, "Error con algunos de los archivos para la generación del reporte.");
             es.printStackTrace();
+             loading.setVisible(false);
+            jp1.setVisible(false);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getCause() + e.getMessage());
             JOptionPane.showMessageDialog(null, "Error desconocido llame a un administrador.\n Causa del error: \n" + e);
             e.printStackTrace();
+             loading.setVisible(false);
+            jp1.setVisible(false);
         }
     }
 

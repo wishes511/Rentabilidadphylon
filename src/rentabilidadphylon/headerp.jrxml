@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="555" pageHeight="802" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ce6cf3bd-6f73-4b59-9edb-7c9a9e485419">
-	<property name="ireport.zoom" value="2.143588810000008"/>
-	<property name="ireport.x" value="161"/>
+	<property name="ireport.zoom" value="1.771561000000008"/>
+	<property name="ireport.x" value="20"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="f1" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -46,10 +46,10 @@ order by pares desc]]>
 	<variable name="utilidads" class="java.lang.Float"/>
 	<variable name="costosub" class="java.math.BigDecimal"/>
 	<variable name="gastosub" class="java.math.BigDecimal"/>
-	<variable name="tpares" class="java.lang.Integer" calculation="Sum"/>
+	<variable name="tpares" class="java.lang.Short" calculation="Sum"/>
 	<variable name="costoso" class="java.lang.Float"/>
 	<detail>
-		<band height="17">
+		<band height="13">
 			<textField>
 				<reportElement x="29" y="2" width="100" height="11" uuid="804d5d81-a848-4157-8581-857ef0338c71"/>
 				<textElement>
@@ -58,10 +58,7 @@ order by pares desc]]>
 				<textFieldExpression><![CDATA[$F{Descripcion}]]></textFieldExpression>
 			</textField>
 			<subreport>
-				<reportElement x="0" y="13" width="555" height="3" uuid="edae1f74-f89a-4c9b-89f2-c85ba66cb449"/>
-				<subreportParameter name="tpares">
-					<subreportParameterExpression><![CDATA[$F{pares}]]></subreportParameterExpression>
-				</subreportParameter>
+				<reportElement x="0" y="13" width="555" height="0" uuid="edae1f74-f89a-4c9b-89f2-c85ba66cb449"/>
 				<subreportParameter name="SUBREPORT_DIR">
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -74,50 +71,19 @@ order by pares desc]]>
 				<subreportParameter name="nombre">
 					<subreportParameterExpression><![CDATA[$P{nombre}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="gasto">
-					<subreportParameterExpression><![CDATA[$F{gastos}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="linea">
 					<subreportParameterExpression><![CDATA[$F{Descripcion}]]></subreportParameterExpression>
 				</subreportParameter>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<returnValue subreportVariable="pares" toVariable="pares"/>
-				<returnValue subreportVariable="costos" toVariable="costos"/>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "costoreal.jasper"]]></subreportExpression>
-			</subreport>
-		</band>
-		<band height="4">
-			<subreport>
-				<reportElement x="0" y="0" width="555" height="3" uuid="c4239864-78b2-49ea-baca-ecad7c0e1e3c"/>
-				<subreportParameter name="f1">
-					<subreportParameterExpression><![CDATA[$P{f1}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="f2">
-					<subreportParameterExpression><![CDATA[$P{f2}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="nombre">
-					<subreportParameterExpression><![CDATA[$P{nombre}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="linea">
-					<subreportParameterExpression><![CDATA[$F{Descripcion}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="SUBREPORT_DIR">
-					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="costo">
-					<subreportParameterExpression><![CDATA[$V{costos}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="gasto">
+				<subreportParameter name="gastos">
 					<subreportParameterExpression><![CDATA[$F{gastos}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<returnValue subreportVariable="costo" toVariable="costos" calculation="Sum"/>
-				<returnValue subreportVariable="costotaleso" toVariable="costotots" calculation="Sum"/>
-				<returnValue subreportVariable="costonetoso" toVariable="costonetos" calculation="Sum"/>
-				<returnValue subreportVariable="utilidadso" toVariable="utilidads" calculation="Sum"/>
-				<returnValue subreportVariable="vtanetaso" toVariable="vtanetas" calculation="Sum"/>
-				<returnValue subreportVariable="pareso" toVariable="tpares" calculation="Sum"/>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "body_p.jasper"]]></subreportExpression>
+				<returnValue subreportVariable="pareso" toVariable="tpares"/>
+				<returnValue subreportVariable="vtanetaso" toVariable="vtanetas"/>
+				<returnValue subreportVariable="costotalso" toVariable="costotots"/>
+				<returnValue subreportVariable="costnetoso" toVariable="costonetos"/>
+				<returnValue subreportVariable="utilidadeso" toVariable="utilidads"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "producto_detalle_c.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 		<band height="8">
