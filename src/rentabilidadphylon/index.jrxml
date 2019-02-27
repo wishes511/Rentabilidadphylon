@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="67d312c1-c93b-45de-b288-e6f7dc979a52">
 	<property name="ireport.zoom" value="3.797498335832419"/>
-	<property name="ireport.x" value="766"/>
+	<property name="ireport.x" value="1075"/>
 	<property name="ireport.y" value="303"/>
 	<parameter name="f1" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -117,7 +117,7 @@ order by pares DESC]]>
 				<textElement textAlignment="Center">
 					<font size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[CostoTot]]></text>
+				<text><![CDATA[CostoNeto]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="383" y="0" width="49" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="f1169099-310b-481e-97e4-b26b5ed27d34"/>
@@ -131,7 +131,7 @@ order by pares DESC]]>
 				<textElement textAlignment="Center">
 					<font size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[CostoNto]]></text>
+				<text><![CDATA[Gastoneto]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="483" y="0" width="49" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="52ead0da-1ded-462b-92ae-1c8f0d14685e"/>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="555" pageHeight="802" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ce6cf3bd-6f73-4b59-9edb-7c9a9e485419">
 	<property name="ireport.zoom" value="1.771561000000008"/>
-	<property name="ireport.x" value="20"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="f1" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -86,7 +86,8 @@ order by pares desc]]>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "producto_detalle_c.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
-		<band height="8">
+		<band height="8"/>
+		<band height="10">
 			<textField pattern="#,##0.00">
 				<reportElement x="483" y="0" width="49" height="8" uuid="7357017f-9dd2-4f10-bf60-fbbe9225bb7b"/>
 				<textElement textAlignment="Center">
