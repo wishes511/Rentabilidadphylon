@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ce6cf3bd-6f73-4b59-9edb-7c9a9e485419">
+	<property name="ireport.zoom" value="2.3579476910000134"/>
+	<property name="ireport.x" value="532"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="f1" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="f2" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nombre" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\gateway1-\\Documents\\NetBeansProjects\\Rentabilidadphylon\\src\\rentabilidadphylon\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select l.Descripcion,sum(f.totalpares) as 'pares',avg(g.mo+g.gf+g.ga+g.mi) as 'gastos'
+ from facturas f
+join DFacturas df on df.Factura=f.Factura
+join Lineas l on df.Linea = l.linea
+join productos p on df.producto=p.producto
+join ProduccionPhy.dbo.Costos cost on df.Producto=cost.id_productoRCPT
+join ProduccionPhy.dbo.Producto pr on cost.id_Producto=pr.id_producto
+join ProduccionPhy.dbo.Gastos g on year(f.fecha)=g.año and month(f.fecha)=g.mes
+where (f.estatus='F') and year(df.fecha)=year($P{f1})
+ and CONVERT(date,f.fecha) between $P{f1} and $P{f2}
+group by l.Descripcion
+order by sum(f.totalpares) desc]]>
+	</queryString>
+	<field name="Descripcion" class="java.lang.String"/>
+	<field name="pares" class="java.lang.Integer"/>
+	<field name="gastos" class="java.math.BigDecimal"/>
+	<variable name="pares" class="java.lang.Integer">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="precios" class="java.lang.Float"/>
+	<variable name="vtanetas" class="java.lang.Float"/>
+	<variable name="costos" class="java.lang.Float"/>
+	<variable name="costotots" class="java.lang.Float"/>
+	<variable name="gastos" class="java.lang.Float"/>
+	<variable name="costonetos" class="java.lang.Float"/>
+	<variable name="utilidads" class="java.lang.Float"/>
+	<variable name="costosub" class="java.math.BigDecimal"/>
+	<variable name="gastosub" class="java.math.BigDecimal"/>
+	<variable name="tpares" class="java.lang.Short" calculation="Sum"/>
+	<variable name="costoso" class="java.lang.Float"/>
+	<title>
+		<band height="66">
+			<staticText>
+				<reportElement x="289" y="30" width="20" height="30" uuid="5794c2b7-48ff-4287-a23f-9c9f2a4495a3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Al]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="165" y="0" width="239" height="30" uuid="95c49039-329a-4aaf-9946-894b5745b41e"/>
+				<textElement textAlignment="Center">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de rentabilidad por linea]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="194" y="30" width="95" height="30" uuid="a16de1f7-7ebf-4d5a-bd0b-186049a6a3e9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{f1}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="13" y="20" width="138" height="40" uuid="60f52f86-4ca8-4e31-b9b8-120fd580fffb"/>
+				<imageExpression><![CDATA["C:\\af\\Rentabilidad\\images\\top.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="309" y="30" width="95" height="30" uuid="3af5edb4-0f15-47dc-9943-19d8ce34b669"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{f2}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="419" y="0" width="136" height="20" uuid="0cc53c91-b4b8-4868-83b9-98afd9b342ed"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="164" y="30" width="30" height="30" uuid="086132bb-3f15-4ce4-bf35-19f0ed8f8194"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Del]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="14">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="11" forecolor="#FFFFFF" backcolor="#0066FF" uuid="13de9b96-98a2-464a-b15b-d79195f12432"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="285" y="0" width="49" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="f6873996-cf28-4868-ac60-63974e41df8c"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Costo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="0" width="30" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="18a3e109-b5f4-49c8-b67c-e69643a3a6b3"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pares]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="383" y="0" width="49" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="70e0c97a-ea62-4620-8f0a-1827958075f9"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gastos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="194" y="0" width="42" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="72de3b1a-dc26-4cdc-9485-492f1c3e6e81"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="334" y="0" width="49" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="6864ffd0-38e3-4a6d-b285-9d5c2818f3f5"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CostoNeto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="236" y="0" width="49" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="6601de6d-952d-49ef-a0d6-b2c1838cfae0"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VtaNeta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="0" width="51" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="1ab35068-fd0a-4703-a027-dc9337495bab"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gastoneto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="532" y="0" width="23" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="57450e61-163f-4023-9c36-ac48dbf8be4c"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="483" y="0" width="49" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="a0e8cc12-608f-4d07-ac65-1fa0c9a6f6dc"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Utilidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="0" width="104" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="96da60c6-11b6-4f16-a71c-484e7fb3a700"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="36" y="0" width="24" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="3f0604ef-dc44-4e57-bb48-a336bde759f9"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Suela]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13">
+			<textField>
+				<reportElement x="29" y="2" width="100" height="11" uuid="804d5d81-a848-4157-8581-857ef0338c71"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Descripcion}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="0" y="13" width="555" height="0" uuid="edae1f74-f89a-4c9b-89f2-c85ba66cb449"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="f1">
+					<subreportParameterExpression><![CDATA[$P{f1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="f2">
+					<subreportParameterExpression><![CDATA[$P{f2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombre">
+					<subreportParameterExpression><![CDATA[$P{nombre}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="linea">
+					<subreportParameterExpression><![CDATA[$F{Descripcion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="gastos">
+					<subreportParameterExpression><![CDATA[$F{gastos}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="pareso" toVariable="tpares"/>
+				<returnValue subreportVariable="vtanetaso" toVariable="vtanetas"/>
+				<returnValue subreportVariable="costotalso" toVariable="costotots"/>
+				<returnValue subreportVariable="costnetoso" toVariable="costonetos"/>
+				<returnValue subreportVariable="utilidadeso" toVariable="utilidads"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "producto_detalle_c_l.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="10">
+			<textField pattern="#,##0.00">
+				<reportElement x="483" y="2" width="49" height="8" uuid="7357017f-9dd2-4f10-bf60-fbbe9225bb7b"/>
+				<textElement textAlignment="Center">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{utilidads}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="432" y="2" width="51" height="8" uuid="c255475e-8a03-42b2-b5da-b621df978cf8"/>
+				<textElement textAlignment="Center">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{costonetos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="338" y="2" width="47" height="8" uuid="053e0b41-c5cd-4081-afd2-badc04ac31fb"/>
+				<textElement textAlignment="Center">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{costotots}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="237" y="2" width="49" height="8" uuid="cd7f4ec5-0b0a-4dae-838d-5d6ef4259b01"/>
+				<textElement textAlignment="Center">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vtanetas}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="165" y="2" width="30" height="8" uuid="a6145100-90a6-428f-8dd7-e75c69632217"/>
+				<textElement textAlignment="Center">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tpares}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="165" y="1" width="29" height="1" uuid="8fbce1cb-a22d-46a2-a90f-ce060773b84c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="237" y="2" width="48" height="1" uuid="02b347f4-553b-4fda-a15a-7125484b629f"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="338" y="2" width="45" height="1" uuid="5c84c0d5-9cd7-4cf6-9c32-7d614e472a4d"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="432" y="2" width="51" height="1" uuid="051d013d-be01-48c9-8017-1289de168ad2"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="483" y="2" width="49" height="1" uuid="2b056ceb-9a50-4491-a754-84611f83e3cf"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+		<band height="2">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="11446d04-725b-4f1d-b54c-eea7c2fc4bae"/>
+				<graphicElement>
+					<pen lineWidth="0.25" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="16">
+			<textField>
+				<reportElement x="229" y="0" width="80" height="13" uuid="2f5bf197-ac43-4203-9fa5-0280535df197"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="309" y="0" width="40" height="13" uuid="5d978a1d-c94b-4d8d-983f-19b3a1c797f5"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

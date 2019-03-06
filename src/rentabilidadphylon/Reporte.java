@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import modelo.reporte;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -22,7 +21,6 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
-import validacion.validar;
 
 /**
  *
@@ -53,12 +51,11 @@ public class Reporte extends javax.swing.JInternalFrame implements Runnable{
         bg2.add(all3);
         bg3.add(t4);
         bg3.add(t5);
+        t2.setVisible(false);
         loading.setVisible(false);
         jp1.setVisible(false);
         jp1.setOpaque(true);
         jp1.setBackground( new Color(255, 255, 255, 150) );
-        
-
     }
 
     @SuppressWarnings("unchecked")

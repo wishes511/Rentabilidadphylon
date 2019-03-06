@@ -35,12 +35,11 @@ case when $P{pares}=0 then 0 else avg(g.mo+g.gf+g.ga+g.mi) end as 'gastos'
 from facturas f
 join DFacturas df on df.Factura=f.Factura
 join Lineas l on df.Linea = l.linea
-join RACobranzaPhylon.dbo.Clientes c on f.numcliente=c.NumCliente
 join ProduccionPhy.dbo.Costos cost on df.Producto=cost.id_productoRCPT
 join ProduccionPhy.dbo.Producto p on cost.id_Producto=p.id_producto
 join CmpPhylon.dbo.Materiales cp on cost.cvemat=cp.cvemat
 join ProduccionPhy.dbo.Gastos g on year(f.fecha)=g.año and month(f.fecha)=g.mes
-where (f.estatus='F') and Nombre = $P{nombre} and L.Descripcion=$P{linea} and cost.id_producto=$P{producto} and year(df.fecha)=year($P{f1})
+where (f.estatus='F') and L.Descripcion=$P{linea} and cost.id_producto=$P{producto} and year(df.fecha)=year($P{f1})
 and cost.punto =$P{punto} and CONVERT(date,f.fecha) between $P{f1} and $P{f2}
  group by cost.costo]]>
 	</queryString>

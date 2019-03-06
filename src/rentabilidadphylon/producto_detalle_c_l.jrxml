@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="555" pageHeight="802" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="7ffa27ba-2ad9-47d9-8a1e-ddeb5efb9d66">
+	<property name="ireport.zoom" value="4.105264945845655"/>
+	<property name="ireport.x" value="272"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="f1" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="f2" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nombre" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="linea" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\GATEWAY1-\\Documents\\NetBeansProjects\\Rentabilidadphylon\\src\\rentabilidadphylon\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="gastos" class="java.math.BigDecimal">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select cost.Id_Producto,df.corrida,p.descripcion,cor.descripcion as 'desc',df.producto
+from facturas f
+join DFacturas df on df.Factura=f.Factura
+join Lineas l on df.Linea = l.linea
+join corridas cor on df.corrida=cor.corrida
+join ProduccionPhy.dbo.Costos cost on df.Producto=cost.id_productoRCPT
+join ProduccionPhy.dbo.Producto p on cost.id_Producto=p.id_producto
+where (f.estatus='F') and  L.Descripcion=$P{linea} and year(df.fecha)=year($P{f1})
+ and CONVERT(date,f.fecha) between $P{f1} and $P{f2}
+ group by cost.id_producto,df.corrida,p.descripcion,cor.descripcion,df.producto]]>
+	</queryString>
+	<field name="Id_Producto" class="java.lang.Short"/>
+	<field name="corrida" class="java.lang.Short"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="desc" class="java.lang.String"/>
+	<field name="producto" class="java.lang.Short"/>
+	<variable name="pareso" class="java.lang.Short" calculation="Sum"/>
+	<variable name="precioso" class="java.lang.Float" resetType="Column" calculation="Sum"/>
+	<variable name="vtanetaso" class="java.lang.Float" calculation="Sum"/>
+	<variable name="costoso" class="java.lang.Float" calculation="Sum"/>
+	<variable name="costotalso" class="java.lang.Float" calculation="Sum"/>
+	<variable name="gastoso" class="java.lang.Float" calculation="Sum"/>
+	<variable name="costnetoso" class="java.lang.Float" calculation="Sum"/>
+	<variable name="utilidadeso" class="java.lang.Float" calculation="Sum"/>
+	<detail>
+		<band splitType="Stretch">
+			<subreport>
+				<reportElement x="31" y="0" width="524" height="0" uuid="afd55e07-f152-467a-8a03-565c351ca7bb"/>
+				<subreportParameter name="f1">
+					<subreportParameterExpression><![CDATA[$P{f1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="producto">
+					<subreportParameterExpression><![CDATA[$F{Id_Producto}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="f2">
+					<subreportParameterExpression><![CDATA[$P{f2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombre">
+					<subreportParameterExpression><![CDATA[$P{nombre}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="linea">
+					<subreportParameterExpression><![CDATA[$P{linea}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="costos" toVariable="costoso"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "punto_detalle_c_l.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band>
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="0" uuid="ba80aa38-b0ff-4fe0-a147-c5f8b8902afc"/>
+				<subreportParameter name="f1">
+					<subreportParameterExpression><![CDATA[$P{f1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="f2">
+					<subreportParameterExpression><![CDATA[$P{f2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombre">
+					<subreportParameterExpression><![CDATA[$P{nombre}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="producto">
+					<subreportParameterExpression><![CDATA[$F{producto}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="linea">
+					<subreportParameterExpression><![CDATA[$P{linea}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="precios" toVariable="precioso"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "preciopond_l.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band>
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="0" uuid="ae82c12b-307d-4516-b2cc-97d8303abf8c"/>
+				<subreportParameter name="precio">
+					<subreportParameterExpression><![CDATA[$V{precioso}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="costo">
+					<subreportParameterExpression><![CDATA[$V{costoso}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="f1">
+					<subreportParameterExpression><![CDATA[$P{f1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="producto">
+					<subreportParameterExpression><![CDATA[$F{producto}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="f2">
+					<subreportParameterExpression><![CDATA[$P{f2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombre">
+					<subreportParameterExpression><![CDATA[$P{nombre}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="gasto">
+					<subreportParameterExpression><![CDATA[$P{gastos}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="linea">
+					<subreportParameterExpression><![CDATA[$P{linea}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="pareso" toVariable="pareso" calculation="Sum"/>
+				<returnValue subreportVariable="vtanetaso" toVariable="vtanetaso" calculation="Sum"/>
+				<returnValue subreportVariable="costotaleso" toVariable="costotalso" calculation="Sum"/>
+				<returnValue subreportVariable="costonetoso" toVariable="costnetoso" calculation="Sum"/>
+				<returnValue subreportVariable="utilidadso" toVariable="utilidadeso" calculation="Sum"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "body_p_l.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

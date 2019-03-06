@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="555" pageHeight="802" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ce6cf3bd-6f73-4b59-9edb-7c9a9e485419">
+	<property name="ireport.zoom" value="2.853116706110014"/>
+	<property name="ireport.x" value="250"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="f1" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="f2" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nombre" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\gateway1-\\Documents\\NetBeansProjects\\Rentabilidadphylon\\src\\rentabilidadphylon\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="producto" class="java.lang.Short">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="linea" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select sum(df.TotalPares) as 'pares',
+round(case when (salida) =0 then (df.precio) else (df.precio)/1.16 end,2) as 'precio'
+from facturas f
+join DFacturas df on df.Factura=f.Factura
+join Lineas l on df.Linea = l.linea
+where (f.estatus='F') and L.Descripcion=$P{linea} and year(df.fecha)=year($P{f1}) and df.producto=$P{producto}
+ and CONVERT(date,f.fecha) between $P{f1} and $P{f2}
+ group by df.precio,salida]]>
+	</queryString>
+	<field name="pares" class="java.lang.Integer"/>
+	<field name="precio" class="java.math.BigDecimal"/>
+	<variable name="pares" class="java.lang.Integer">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="precios" class="java.lang.Float" calculation="Sum"/>
+	<variable name="vtanetas" class="java.lang.Float"/>
+	<variable name="costos" class="java.lang.Float"/>
+	<variable name="costotots" class="java.lang.Float"/>
+	<variable name="gastos" class="java.lang.Float"/>
+	<variable name="costonetos" class="java.lang.Float"/>
+	<variable name="utilidads" class="java.lang.Float"/>
+	<variable name="costosub" class="java.math.BigDecimal"/>
+	<variable name="gastosub" class="java.math.BigDecimal"/>
+	<variable name="tpares" class="java.lang.Short" calculation="Sum"/>
+	<variable name="costoso" class="java.lang.Float"/>
+	<detail>
+		<band>
+			<subreport>
+				<reportElement x="8" y="0" width="504" height="0" uuid="d5ff7505-d73c-4302-9754-3746a710cb12"/>
+				<subreportParameter name="f1">
+					<subreportParameterExpression><![CDATA[$P{f1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="f2">
+					<subreportParameterExpression><![CDATA[$P{f2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombre">
+					<subreportParameterExpression><![CDATA[$P{nombre}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="producto">
+					<subreportParameterExpression><![CDATA[$P{producto}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="linea">
+					<subreportParameterExpression><![CDATA[$P{linea}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="pars">
+					<subreportParameterExpression><![CDATA[$F{pares}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="precio">
+					<subreportParameterExpression><![CDATA[$F{precio}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="precios" toVariable="precios" calculation="Sum"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "preciopond_precio_l.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>
