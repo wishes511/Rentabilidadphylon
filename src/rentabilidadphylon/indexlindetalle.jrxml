@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ce6cf3bd-6f73-4b59-9edb-7c9a9e485419">
-	<property name="ireport.zoom" value="1.4641000000000102"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.zoom" value="2.1435888100000153"/>
+	<property name="ireport.x" value="436"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="f1" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -232,14 +232,6 @@ order by sum(df.totalpares) desc]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{vtanetas}]]></textFieldExpression>
 			</textField>
-		</band>
-		<band height="4">
-			<line>
-				<reportElement x="0" y="0" width="555" height="1" uuid="3a16935d-5a71-4943-8f67-6f0ce370fd68"/>
-				<graphicElement>
-					<pen lineWidth="0.25" lineStyle="Dashed"/>
-				</graphicElement>
-			</line>
 		</band>
 	</detail>
 	<columnFooter>

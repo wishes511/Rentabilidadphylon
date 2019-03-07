@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ce6cf3bd-6f73-4b59-9edb-7c9a9e485419">
-	<property name="ireport.zoom" value="2.3579476910000134"/>
-	<property name="ireport.x" value="532"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ce6cf3bd-6f73-4b59-9edb-7c9a9e485419">
+	<property name="ireport.zoom" value="1.7715610000000104"/>
+	<property name="ireport.x" value="156"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="f1" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -16,18 +16,15 @@
 		<defaultValueExpression><![CDATA["C:\\Users\\gateway1-\\Documents\\NetBeansProjects\\Rentabilidadphylon\\src\\rentabilidadphylon\\"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select l.Descripcion,sum(f.totalpares) as 'pares',avg(g.mo+g.gf+g.ga+g.mi) as 'gastos'
+		<![CDATA[select l.Descripcion,sum(df.totalpares) as 'pares',avg(g.mo+g.gf+g.ga+g.mi) as 'gastos'
  from facturas f
 join DFacturas df on df.Factura=f.Factura
 join Lineas l on df.Linea = l.linea
-join productos p on df.producto=p.producto
-join ProduccionPhy.dbo.Costos cost on df.Producto=cost.id_productoRCPT
-join ProduccionPhy.dbo.Producto pr on cost.id_Producto=pr.id_producto
 join ProduccionPhy.dbo.Gastos g on year(f.fecha)=g.año and month(f.fecha)=g.mes
 where (f.estatus='F') and year(df.fecha)=year($P{f1})
  and CONVERT(date,f.fecha) between $P{f1} and $P{f2}
 group by l.Descripcion
-order by sum(f.totalpares) desc]]>
+order by pares desc]]>
 	</queryString>
 	<field name="Descripcion" class="java.lang.String"/>
 	<field name="pares" class="java.lang.Integer"/>
@@ -216,35 +213,35 @@ order by sum(f.totalpares) desc]]>
 			</subreport>
 		</band>
 		<band height="10">
-			<textField pattern="#,##0.00">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement x="483" y="2" width="49" height="8" uuid="7357017f-9dd2-4f10-bf60-fbbe9225bb7b"/>
 				<textElement textAlignment="Center">
 					<font size="6" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{utilidads}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement x="432" y="2" width="51" height="8" uuid="c255475e-8a03-42b2-b5da-b621df978cf8"/>
 				<textElement textAlignment="Center">
 					<font size="6" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{costonetos}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement x="338" y="2" width="47" height="8" uuid="053e0b41-c5cd-4081-afd2-badc04ac31fb"/>
 				<textElement textAlignment="Center">
 					<font size="6" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{costotots}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement x="237" y="2" width="49" height="8" uuid="cd7f4ec5-0b0a-4dae-838d-5d6ef4259b01"/>
 				<textElement textAlignment="Center">
 					<font size="6" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{vtanetas}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0">
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="165" y="2" width="30" height="8" uuid="a6145100-90a6-428f-8dd7-e75c69632217"/>
 				<textElement textAlignment="Center">
 					<font size="6" isBold="true"/>
@@ -279,14 +276,6 @@ order by sum(f.totalpares) desc]]>
 				<reportElement x="483" y="2" width="49" height="1" uuid="2b056ceb-9a50-4491-a754-84611f83e3cf"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineStyle="Dashed"/>
-				</graphicElement>
-			</line>
-		</band>
-		<band height="2">
-			<line>
-				<reportElement x="0" y="0" width="555" height="1" uuid="11446d04-725b-4f1d-b54c-eea7c2fc4bae"/>
-				<graphicElement>
-					<pen lineWidth="0.25" lineStyle="Dashed"/>
 				</graphicElement>
 			</line>
 		</band>
