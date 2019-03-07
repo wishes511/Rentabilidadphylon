@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ce6cf3bd-6f73-4b59-9edb-7c9a9e485419">
-	<property name="ireport.zoom" value="2.1435888100000153"/>
-	<property name="ireport.x" value="436"/>
+	<property name="ireport.zoom" value="1.2100000000000088"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="f1" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -40,39 +40,42 @@ order by sum(df.totalpares) desc]]>
 				<imageExpression><![CDATA["C:\\af\\Rentabilidad\\images\\top.png"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="154" y="10" width="249" height="30" uuid="3cf4ffa6-502d-4635-bdf6-036b3118aa24"/>
+				<reportElement x="154" y="10" width="249" height="20" uuid="3cf4ffa6-502d-4635-bdf6-036b3118aa24"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Reporte de rentabilidad por punto y Linea]]></text>
 			</staticText>
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="419" y="0" width="136" height="20" uuid="a5bbe4ef-331a-40f2-aa7a-da2d829120b0"/>
+				<reportElement x="436" y="10" width="136" height="20" uuid="a5bbe4ef-331a-40f2-aa7a-da2d829120b0"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="161" y="40" width="30" height="18" uuid="f024e26f-0f7a-40c2-9aab-c41d7ee13a88"/>
+				<reportElement x="161" y="32" width="30" height="18" uuid="f024e26f-0f7a-40c2-9aab-c41d7ee13a88"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Del]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="191" y="40" width="95" height="18" uuid="41513269-30c1-4f53-b957-20ad53701253"/>
+				<reportElement x="191" y="32" width="95" height="18" uuid="41513269-30c1-4f53-b957-20ad53701253"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{f1}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="306" y="40" width="95" height="18" uuid="627a2e25-1e8d-4cfd-9d2c-d58504305be9"/>
+				<reportElement x="306" y="32" width="95" height="18" uuid="627a2e25-1e8d-4cfd-9d2c-d58504305be9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{f2}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="286" y="40" width="20" height="18" uuid="e0beb529-48aa-447f-bb83-4932cc1dd069"/>
+				<reportElement x="286" y="32" width="20" height="18" uuid="e0beb529-48aa-447f-bb83-4932cc1dd069"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -159,8 +162,11 @@ order by sum(df.totalpares) desc]]>
 	</columnHeader>
 	<detail>
 		<band height="16" splitType="Stretch">
+			<rectangle radius="3">
+				<reportElement x="0" y="0" width="555" height="11" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="61330530-8f6a-438d-857f-a13e58def55a"/>
+			</rectangle>
 			<textField>
-				<reportElement x="18" y="0" width="100" height="11" uuid="804d5d81-a848-4157-8581-857ef0338c71"/>
+				<reportElement x="18" y="0" width="100" height="11" forecolor="#000000" uuid="804d5d81-a848-4157-8581-857ef0338c71"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>

@@ -24,6 +24,9 @@
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\GATEWAY1-\\Documents\\NetBeansProjects\\Rentabilidadphylon\\src\\rentabilidadphylon\\"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="precio" class="java.lang.Float">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[--- subreporte pares por punto y corrida v2
  select c15 = case when (dp.corrida =90 and cost.punto=15) THEN SUM(cant1)
@@ -69,6 +72,9 @@ and cost.punto =$P{punto}
 		<band height="8" splitType="Stretch">
 			<subreport>
 				<reportElement x="0" y="0" width="555" height="8" uuid="a9ca4d35-2295-4586-90c9-39c67aaa0338"/>
+				<subreportParameter name="precio">
+					<subreportParameterExpression><![CDATA[$P{precio}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="punto">
 					<subreportParameterExpression><![CDATA[$P{punto}]]></subreportParameterExpression>
 				</subreportParameter>

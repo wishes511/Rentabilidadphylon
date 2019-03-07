@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ce6cf3bd-6f73-4b59-9edb-7c9a9e485419">
 	<property name="ireport.zoom" value="1.7715610000000104"/>
-	<property name="ireport.x" value="156"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="f1" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -46,23 +46,23 @@ order by pares desc]]>
 	<title>
 		<band height="66">
 			<staticText>
-				<reportElement x="289" y="30" width="20" height="30" uuid="5794c2b7-48ff-4287-a23f-9c9f2a4495a3"/>
+				<reportElement x="289" y="44" width="20" height="16" uuid="5794c2b7-48ff-4287-a23f-9c9f2a4495a3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="15" isBold="true"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Al]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="165" y="0" width="239" height="30" uuid="95c49039-329a-4aaf-9946-894b5745b41e"/>
+				<reportElement x="164" y="20" width="239" height="20" uuid="95c49039-329a-4aaf-9946-894b5745b41e"/>
 				<textElement textAlignment="Center">
-					<font size="15" isBold="true"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Reporte de rentabilidad por linea]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="194" y="30" width="95" height="30" uuid="a16de1f7-7ebf-4d5a-bd0b-186049a6a3e9"/>
+				<reportElement x="194" y="44" width="95" height="16" uuid="a16de1f7-7ebf-4d5a-bd0b-186049a6a3e9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="15" isBold="true"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{f1}]]></textFieldExpression>
 			</textField>
@@ -71,20 +71,23 @@ order by pares desc]]>
 				<imageExpression><![CDATA["C:\\af\\Rentabilidad\\images\\top.png"]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="309" y="30" width="95" height="30" uuid="3af5edb4-0f15-47dc-9943-19d8ce34b669"/>
+				<reportElement x="309" y="44" width="95" height="16" uuid="3af5edb4-0f15-47dc-9943-19d8ce34b669"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="15" isBold="true"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{f2}]]></textFieldExpression>
 			</textField>
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="419" y="0" width="136" height="20" uuid="0cc53c91-b4b8-4868-83b9-98afd9b342ed"/>
+				<reportElement x="436" y="20" width="136" height="20" uuid="0cc53c91-b4b8-4868-83b9-98afd9b342ed"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="164" y="30" width="30" height="30" uuid="086132bb-3f15-4ce4-bf35-19f0ed8f8194"/>
+				<reportElement x="164" y="44" width="30" height="16" uuid="086132bb-3f15-4ce4-bf35-19f0ed8f8194"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="15" isBold="true"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Del]]></text>
 			</staticText>
@@ -176,8 +179,11 @@ order by pares desc]]>
 	</columnHeader>
 	<detail>
 		<band height="13">
+			<rectangle radius="3">
+				<reportElement x="0" y="0" width="555" height="11" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="257976b9-03cc-48d0-9dd8-5e5b818dcdaf"/>
+			</rectangle>
 			<textField>
-				<reportElement x="29" y="2" width="100" height="11" uuid="804d5d81-a848-4157-8581-857ef0338c71"/>
+				<reportElement x="36" y="0" width="100" height="11" uuid="804d5d81-a848-4157-8581-857ef0338c71"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>

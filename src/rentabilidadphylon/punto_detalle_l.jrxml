@@ -21,6 +21,9 @@
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\GATEWAY1-\\Documents\\NetBeansProjects\\Rentabilidadphylon\\src\\rentabilidadphylon\\"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="precio" class="java.lang.Float">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[select cost.punto
 from facturas f
@@ -45,6 +48,9 @@ where (f.estatus='F') and L.Descripcion=$P{linea} and cost.id_producto=$P{produc
 		<band height="4" splitType="Stretch">
 			<subreport>
 				<reportElement x="0" y="0" width="555" height="4" uuid="2e67dcb5-2609-43e7-ac7f-ab8880844377"/>
+				<subreportParameter name="precio">
+					<subreportParameterExpression><![CDATA[$P{precio}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="punto">
 					<subreportParameterExpression><![CDATA[$F{punto}]]></subreportParameterExpression>
 				</subreportParameter>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="67d312c1-c93b-45de-b288-e6f7dc979a52">
-	<property name="ireport.zoom" value="3.797498335832419"/>
-	<property name="ireport.x" value="1075"/>
-	<property name="ireport.y" value="303"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="67d312c1-c93b-45de-b288-e6f7dc979a52">
+	<property name="ireport.zoom" value="1.7715610000000037"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="f1" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -37,9 +37,12 @@ order by pares DESC]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="69" splitType="Stretch">
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="419" y="0" width="136" height="20" uuid="da5c47a6-6af5-4f74-b649-9bce1d97b88b"/>
+				<reportElement x="432" y="20" width="136" height="20" uuid="da5c47a6-6af5-4f74-b649-9bce1d97b88b"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<image>
@@ -47,37 +50,37 @@ order by pares DESC]]>
 				<imageExpression><![CDATA["C:\\af\\Rentabilidad\\images\\top.png"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="172" y="0" width="211" height="30" uuid="e02abc06-5e65-4aab-813f-bb85f795676b"/>
+				<reportElement x="172" y="20" width="211" height="20" uuid="e02abc06-5e65-4aab-813f-bb85f795676b"/>
 				<textElement textAlignment="Center">
-					<font size="17" isBold="true"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Reporte de rentabilidad]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="164" y="30" width="30" height="30" uuid="58aa8f3a-7017-4c36-ad71-3bdc2fb7dc99"/>
+				<reportElement x="160" y="40" width="30" height="16" uuid="58aa8f3a-7017-4c36-ad71-3bdc2fb7dc99"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="15" isBold="true"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Del]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="194" y="30" width="95" height="30" uuid="81d15112-788a-4b31-bb9c-6117ae4f6186"/>
+				<reportElement x="190" y="40" width="95" height="16" uuid="81d15112-788a-4b31-bb9c-6117ae4f6186"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="15" isBold="true"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{f1}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="289" y="30" width="20" height="30" uuid="148212a8-6b89-45fc-b47b-97fd1db82d3b"/>
+				<reportElement x="285" y="40" width="20" height="16" uuid="148212a8-6b89-45fc-b47b-97fd1db82d3b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="15" isBold="true"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Al]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="309" y="30" width="95" height="30" uuid="43426ec2-1330-4742-afce-e6f264a7a738"/>
+				<reportElement x="305" y="40" width="95" height="16" uuid="43426ec2-1330-4742-afce-e6f264a7a738"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="15" isBold="true"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{f2}]]></textFieldExpression>
 			</textField>
@@ -172,6 +175,9 @@ order by pares DESC]]>
 	</columnHeader>
 	<detail>
 		<band height="18" splitType="Stretch">
+			<rectangle radius="3">
+				<reportElement x="0" y="0" width="555" height="15" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="fc9227c5-c769-4b49-b9a0-bc5387719418"/>
+			</rectangle>
 			<textField>
 				<reportElement x="0" y="0" width="164" height="15" uuid="11ee8472-d42a-40d3-8f88-a18248f2bc7e"/>
 				<textElement verticalAlignment="Middle">
@@ -196,11 +202,6 @@ order by pares DESC]]>
 				<returnValue subreportVariable="precios" toVariable="precio" calculation="Sum"/>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "headerp.jasper"]]></subreportExpression>
 			</subreport>
-		</band>
-		<band height="2">
-			<line>
-				<reportElement x="0" y="1" width="555" height="1" uuid="6c57f406-cce4-4802-8519-3908a2786b54"/>
-			</line>
 		</band>
 	</detail>
 	<columnFooter>

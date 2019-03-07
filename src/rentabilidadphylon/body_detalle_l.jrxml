@@ -27,9 +27,11 @@
 	<parameter name="pares" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="precio" class="java.lang.Float">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[select 
-case when $P{pares}=0 then 0 when (max(salida) =0 and $P{pares}!=0) then max(df.precio) when (max(salida) is NULL and $P{pares}!=0) then max(df.precio) else (avg(df.precio)/1.16) end as 'precio',
 case when $P{pares}=0 then 0 else cost.costo end as 'costo',
 case when $P{pares}=0 then 0 else avg(g.mo+g.gf+g.ga+g.mi) end as 'gastos'
 from facturas f
@@ -37,13 +39,11 @@ join DFacturas df on df.Factura=f.Factura
 join Lineas l on df.Linea = l.linea
 join ProduccionPhy.dbo.Costos cost on df.Producto=cost.id_productoRCPT
 join ProduccionPhy.dbo.Producto p on cost.id_Producto=p.id_producto
-join CmpPhylon.dbo.Materiales cp on cost.cvemat=cp.cvemat
 join ProduccionPhy.dbo.Gastos g on year(f.fecha)=g.año and month(f.fecha)=g.mes
 where (f.estatus='F') and L.Descripcion=$P{linea} and cost.id_producto=$P{producto} and year(df.fecha)=year($P{f1})
 and cost.punto =$P{punto} and CONVERT(date,f.fecha) between $P{f1} and $P{f2}
  group by cost.costo]]>
 	</queryString>
-	<field name="precio" class="java.math.BigDecimal"/>
 	<field name="costo" class="java.math.BigDecimal"/>
 	<field name="gastos" class="java.math.BigDecimal"/>
 	<variable name="pareso" class="java.lang.Integer" calculation="Sum">
@@ -51,10 +51,10 @@ and cost.punto =$P{punto} and CONVERT(date,f.fecha) between $P{f1} and $P{f2}
 		<initialValueExpression><![CDATA[]]></initialValueExpression>
 	</variable>
 	<variable name="precioso" class="java.lang.Float" calculation="Sum">
-		<variableExpression><![CDATA[$F{precio}]]></variableExpression>
+		<variableExpression><![CDATA[$P{precio}]]></variableExpression>
 	</variable>
 	<variable name="vtanetaso" class="java.lang.Float" calculation="Sum">
-		<variableExpression><![CDATA[$P{pares}*$F{precio}.floatValue()]]></variableExpression>
+		<variableExpression><![CDATA[$P{pares}*$P{precio}.floatValue()]]></variableExpression>
 		<initialValueExpression><![CDATA[]]></initialValueExpression>
 	</variable>
 	<variable name="costoso" class="java.lang.Float" calculation="Sum">
@@ -70,7 +70,7 @@ and cost.punto =$P{punto} and CONVERT(date,f.fecha) between $P{f1} and $P{f2}
 		<variableExpression><![CDATA[($P{pares}*$F{costo}.floatValue())+($F{gastos}.floatValue()*$P{pares}.floatValue())]]></variableExpression>
 	</variable>
 	<variable name="utilidadeso" class="java.lang.Float" calculation="Sum">
-		<variableExpression><![CDATA[($P{pares}*$F{precio}.floatValue()) -(($P{pares}*$F{costo}.floatValue())+($F{gastos}.floatValue()*$P{pares}.floatValue()))]]></variableExpression>
+		<variableExpression><![CDATA[($P{pares}*$P{precio}.floatValue()) -(($P{pares}*$F{costo}.floatValue())+($F{gastos}.floatValue()*$P{pares}.floatValue()))]]></variableExpression>
 	</variable>
 	<detail>
 		<band height="11">
@@ -79,7 +79,7 @@ and cost.punto =$P{punto} and CONVERT(date,f.fecha) between $P{f1} and $P{f2}
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{precio}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="27" y="0" width="24" height="11" uuid="8ce70c31-5ce3-4f5f-9c9a-fc837fbcb541"/>
@@ -93,7 +93,7 @@ and cost.punto =$P{punto} and CONVERT(date,f.fecha) between $P{f1} and $P{f2}
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{pares}*$F{precio}.floatValue()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{pares}*$P{precio}.floatValue()]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="185" y="0" width="53" height="11" uuid="ed120797-5d6c-47ba-8428-9adfd49d9f5d"/>
@@ -128,14 +128,14 @@ and cost.punto =$P{punto} and CONVERT(date,f.fecha) between $P{f1} and $P{f2}
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[($P{pares}*$F{precio}.floatValue()) -(($P{pares}*$F{costo}.floatValue())+($F{gastos}.floatValue()*$P{pares}.floatValue()))]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($P{pares}*$P{precio}.floatValue()) -(($P{pares}*$F{costo}.floatValue())+($F{gastos}.floatValue()*$P{pares}.floatValue()))]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement x="427" y="0" width="39" height="11" uuid="fcd471a2-6abb-4c35-b72c-77e77f408609"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[((($P{pares}*$F{precio}.floatValue()) -(($P{pares}*$F{costo}.floatValue())+($F{gastos}.floatValue()*$P{pares}.floatValue())))/($P{pares}*$F{precio}.floatValue()))*100]]></textFieldExpression>
+				<textFieldExpression><![CDATA[((($P{pares}*$P{precio}.floatValue()) -(($P{pares}*$F{costo}.floatValue())+($F{gastos}.floatValue()*$P{pares}.floatValue())))/($P{pares}*$P{precio}.floatValue()))*100]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="466" y="0" width="14" height="11" uuid="46c5a245-6cd3-4baa-a102-6dc644324a5c"/>

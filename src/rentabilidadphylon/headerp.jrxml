@@ -50,6 +50,12 @@ order by pares desc]]>
 	<variable name="costoso" class="java.lang.Float"/>
 	<detail>
 		<band height="13">
+			<rectangle radius="3">
+				<reportElement x="29" y="2" width="136" height="11" forecolor="#FFFFFF" backcolor="#E5E5E5" uuid="7925f9ae-f0c6-4a4b-b931-a510da3adfe4"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
 			<textField>
 				<reportElement x="29" y="2" width="100" height="11" uuid="804d5d81-a848-4157-8581-857ef0338c71"/>
 				<textElement>
