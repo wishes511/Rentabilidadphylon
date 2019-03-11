@@ -100,7 +100,7 @@ order by sum(df.totalpares) desc]]>
 				<textElement textAlignment="Center">
 					<font size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Costo Tot]]></text>
+				<text><![CDATA[CostoMat]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="152" y="0" width="63" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="86d2f39d-4da2-414f-b6ff-5501d4790744"/>
@@ -128,7 +128,7 @@ order by sum(df.totalpares) desc]]>
 				<textElement textAlignment="Center">
 					<font size="7" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Costo Nto.]]></text>
+				<text><![CDATA[CostoTotal]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="311" y="0" width="39" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="5ca5a1ac-8feb-4c2f-8436-a809275caa4c"/>

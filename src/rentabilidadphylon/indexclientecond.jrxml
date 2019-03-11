@@ -32,6 +32,9 @@ order by pares DESC]]>
 	<variable name="gastos" class="java.lang.Float" calculation="Sum"/>
 	<variable name="costoneto" class="java.lang.Float" calculation="Sum"/>
 	<variable name="utilidad" class="java.lang.Float" calculation="Sum"/>
+	<variable name="util" class="java.lang.Float">
+		<variableExpression><![CDATA[($V{utilidad}/$V{vtaneta})*100]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -184,7 +187,7 @@ order by pares DESC]]>
 				<returnValue subreportVariable="costotots" toVariable="costotot"/>
 				<returnValue subreportVariable="costonetos" toVariable="costoneto"/>
 				<returnValue subreportVariable="utilidads" toVariable="utilidad"/>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "head_detalle.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "head_detalle_cond.jasper"]]></subreportExpression>
 			</subreport>
 			<textField>
 				<reportElement x="0" y="0" width="215" height="15" forecolor="#000000" backcolor="#000000" uuid="11ee8472-d42a-40d3-8f88-a18248f2bc7e"/>
@@ -257,6 +260,32 @@ order by pares DESC]]>
 				</textElement>
 				<text><![CDATA[%]]></text>
 			</staticText>
+			<subreport>
+				<reportElement x="10" y="12" width="562" height="13" uuid="b1fd1941-7341-4605-889e-a1b06921c5e6"/>
+				<subreportParameter name="pares">
+					<subreportParameterExpression><![CDATA[$V{pares}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="vtas">
+					<subreportParameterExpression><![CDATA[$V{vtaneta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="costotal">
+					<subreportParameterExpression><![CDATA[$V{costotot}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="costoneto">
+					<subreportParameterExpression><![CDATA[$V{costoneto}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="utilidad">
+					<subreportParameterExpression><![CDATA[$V{utilidad}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="util">
+					<subreportParameterExpression><![CDATA[$V{util}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cliente">
+					<subreportParameterExpression><![CDATA[$F{nombre}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "insertabla.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</detail>
 	<columnFooter>

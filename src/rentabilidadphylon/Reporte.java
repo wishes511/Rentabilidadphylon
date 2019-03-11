@@ -26,6 +26,7 @@ import net.sf.jasperreports.view.JasperViewer;
  *
  * @author Michelon
  */
+
 public class Reporte extends javax.swing.JInternalFrame implements Runnable{
 
     public ButtonGroup bg = new ButtonGroup();
@@ -51,6 +52,7 @@ public class Reporte extends javax.swing.JInternalFrame implements Runnable{
         bg2.add(all3);
         bg3.add(t4);
         bg3.add(t5);
+        bg3.add(t6);
         t2.setVisible(false);
         loading.setVisible(false);
         jp1.setVisible(false);
@@ -64,9 +66,9 @@ public class Reporte extends javax.swing.JInternalFrame implements Runnable{
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         loading = new javax.swing.JLabel();
-        jp1 = new javax.swing.JPanel();
         f1 = new com.toedter.calendar.JDateChooser();
         f2 = new com.toedter.calendar.JDateChooser();
+        t6 = new javax.swing.JRadioButton();
         all1 = new javax.swing.JRadioButton();
         all3 = new javax.swing.JRadioButton();
         combo = new javax.swing.JComboBox<>();
@@ -80,6 +82,7 @@ public class Reporte extends javax.swing.JInternalFrame implements Runnable{
         t5 = new javax.swing.JRadioButton();
         t4 = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
+        jp1 = new javax.swing.JPanel();
 
         setClosable(true);
         setMaximizable(true);
@@ -91,14 +94,15 @@ public class Reporte extends javax.swing.JInternalFrame implements Runnable{
         loading.setIcon(new javax.swing.ImageIcon("C:\\af\\Rentabilidad\\images\\cargando.gif")); // NOI18N
         getContentPane().add(loading, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 210, -1, -1));
 
-        jp1.setOpaque(false);
-        getContentPane().add(jp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 570));
-
         f1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         getContentPane().add(f1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 200, 30));
 
         f2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         getContentPane().add(f2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, 200, 30));
+
+        t6.setFont(new java.awt.Font("Consolas", 1, 12)); // NOI18N
+        t6.setText("Condensado Utilidad");
+        getContentPane().add(t6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 430, 160, 30));
 
         all1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         all1.setText("   Todos");
@@ -223,11 +227,15 @@ public class Reporte extends javax.swing.JInternalFrame implements Runnable{
         jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
+        jp1.setOpaque(false);
+        getContentPane().add(jp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 570));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void t1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t1ActionPerformed
         all1.setSelected(true);
+        t6.setVisible(true);
         combo.setEnabled(false);
         all1.requestFocus();
     }//GEN-LAST:event_t1ActionPerformed
@@ -240,6 +248,7 @@ public class Reporte extends javax.swing.JInternalFrame implements Runnable{
     private void t3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t3ActionPerformed
         all1.setSelected(true);
         combo.setEnabled(false);
+        t6.setVisible(false);
     }//GEN-LAST:event_t3ActionPerformed
 
     private void all1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_all1ActionPerformed
@@ -305,7 +314,7 @@ public class Reporte extends javax.swing.JInternalFrame implements Runnable{
     private void setreport() {
         String nombre = (all1.isSelected()) ? "" : combo.getSelectedItem().toString();
         String tipo = (t1.isSelected()) ? "index" : (t2.isSelected()) ? "indexAg" : "indexlin";
-        String tiporeporte = (t4.isSelected()) ? "" : "detalle";
+        String tiporeporte = (t4.isSelected()) ? "" : (t5.isSelected())?"detalle":"clientecond";
         try {
             ConcurrentHashMap parametross = new ConcurrentHashMap();
             parametross.put("f1", df.format(f1.getDate()));
@@ -380,6 +389,7 @@ public class Reporte extends javax.swing.JInternalFrame implements Runnable{
     private javax.swing.JRadioButton t3;
     private javax.swing.JRadioButton t4;
     private javax.swing.JRadioButton t5;
+    private javax.swing.JRadioButton t6;
     // End of variables declaration//GEN-END:variables
 
     @Override
