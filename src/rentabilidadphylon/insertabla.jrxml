@@ -29,6 +29,6 @@
 	</queryString>
 	<field name="producto" class="java.lang.Short"/>
 	<detail>
-		<band height="7" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</detail>
 </jasperReport>

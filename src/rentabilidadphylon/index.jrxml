@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="67d312c1-c93b-45de-b288-e6f7dc979a52">
 	<property name="ireport.zoom" value="1.7715610000000037"/>
-	<property name="ireport.x" value="202"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="f1" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -25,7 +25,7 @@ order by pares DESC]]>
 	<field name="nombre" class="java.lang.String"/>
 	<field name="numcliente" class="java.lang.Short"/>
 	<field name="pares" class="java.lang.Integer"/>
-	<variable name="pares" class="java.lang.Integer" calculation="Sum"/>
+	<variable name="pares" class="java.lang.Short" calculation="Sum"/>
 	<variable name="precio" class="java.lang.Float"/>
 	<variable name="vtaneta" class="java.lang.Float" calculation="Sum"/>
 	<variable name="costo" class="java.lang.Float" calculation="Sum"/>
@@ -175,11 +175,8 @@ order by pares DESC]]>
 	</columnHeader>
 	<detail>
 		<band height="18" splitType="Stretch">
-			<rectangle radius="3">
-				<reportElement x="0" y="0" width="555" height="15" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="fc9227c5-c769-4b49-b9a0-bc5387719418"/>
-			</rectangle>
 			<textField>
-				<reportElement x="0" y="0" width="164" height="15" uuid="11ee8472-d42a-40d3-8f88-a18248f2bc7e"/>
+				<reportElement x="0" y="4" width="164" height="11" uuid="11ee8472-d42a-40d3-8f88-a18248f2bc7e"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
@@ -197,15 +194,81 @@ order by pares DESC]]>
 					<subreportParameterExpression><![CDATA[$F{nombre}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<returnValue subreportVariable="costos" toVariable="costo"/>
-				<returnValue subreportVariable="tpares" toVariable="pares"/>
-				<returnValue subreportVariable="precios" toVariable="precio" calculation="Sum"/>
+				<returnValue subreportVariable="sumpares" toVariable="pares"/>
+				<returnValue subreportVariable="sumvta" toVariable="vtaneta"/>
+				<returnValue subreportVariable="sumcostos" toVariable="costotot"/>
+				<returnValue subreportVariable="sumcostoneto" toVariable="costoneto"/>
+				<returnValue subreportVariable="sumutilidad" toVariable="utilidad"/>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "headerp.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
+		<band height="14">
+			<rectangle radius="3">
+				<reportElement x="164" y="4" width="404" height="10" forecolor="#FFFFFF" backcolor="#E5E5E5" uuid="9ffdc5d4-2cb2-46e8-a5cf-403aad6c5260"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="164" y="4" width="30" height="10" uuid="933581dd-b676-435c-a6be-88fbc36815a4"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{pares}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="236" y="4" width="49" height="10" uuid="86164f1a-bc4f-41e3-8c5f-7635455734f7"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vtaneta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="334" y="4" width="49" height="10" uuid="651ef6bf-c453-4c42-8082-73211b2d5fb3"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{costotot}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="432" y="4" width="51" height="10" uuid="530e055a-657e-4b74-8f24-220f6115a81e"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{costoneto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="483" y="4" width="49" height="10" uuid="c423e8e3-e4ce-49ea-9361-82dfbfb969a3"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{utilidad}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="532" y="4" width="23" height="10" uuid="d997978e-c2d4-4552-92ac-7ddbfeaf3c84"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($V{utilidad}/$V{vtaneta})*100]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="555" y="4" width="13" height="10" forecolor="#000000" backcolor="#333333" uuid="7a9cb29a-4490-4456-89a0-17a377ca0375"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="121" y="4" width="43" height="10" uuid="e3ae696c-1d8e-43e0-b6f4-f7449a7d733f"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Totales :     ]]></text>
+			</staticText>
+		</band>
 	</detail>
 	<columnFooter>
-		<band height="2" splitType="Stretch"/>
+		<band height="4" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="17" splitType="Stretch">

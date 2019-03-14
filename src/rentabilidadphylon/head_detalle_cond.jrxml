@@ -34,9 +34,9 @@ group by l.Descripcion]]>
 	<variable name="costonetos" class="java.lang.Float" calculation="Sum"/>
 	<variable name="utilidads" class="java.lang.Float" calculation="Sum"/>
 	<detail>
-		<band height="17" splitType="Stretch">
+		<band splitType="Stretch">
 			<subreport>
-				<reportElement x="0" y="11" width="555" height="5" uuid="ab3c5287-2d12-45ce-8801-642e73a58426"/>
+				<reportElement x="0" y="0" width="555" height="0" uuid="ab3c5287-2d12-45ce-8801-642e73a58426"/>
 				<subreportParameter name="f1">
 					<subreportParameterExpression><![CDATA[$P{f1}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -50,11 +50,11 @@ group by l.Descripcion]]>
 					<subreportParameterExpression><![CDATA[$F{Descripcion}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<returnValue subreportVariable="sumpares" toVariable="pares"/>
-				<returnValue subreportVariable="sumvtas" toVariable="vtanetas"/>
-				<returnValue subreportVariable="sumcostos" toVariable="costotots"/>
-				<returnValue subreportVariable="sumgastos" toVariable="costonetos"/>
-				<returnValue subreportVariable="sumutilidad" toVariable="utilidads"/>
+				<returnValue subreportVariable="sumpares" toVariable="pares" calculation="Sum"/>
+				<returnValue subreportVariable="sumvtas" toVariable="vtanetas" calculation="Sum"/>
+				<returnValue subreportVariable="sumcostos" toVariable="costotots" calculation="Sum"/>
+				<returnValue subreportVariable="sumgastos" toVariable="costonetos" calculation="Sum"/>
+				<returnValue subreportVariable="sumutilidad" toVariable="utilidads" calculation="Sum"/>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "producto_detallecond.jasper"]]></subreportExpression>
 			</subreport>
 		</band>

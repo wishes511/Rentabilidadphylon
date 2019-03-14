@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="612" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="46e47c6f-24e3-404b-a12f-bb04ef82cd72">
+	<property name="ireport.zoom" value="1.4641000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="plsql">
+		<![CDATA[{call renta}]]>
+	</queryString>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="pares" class="java.lang.Integer"/>
+	<field name="vta" class="java.lang.Double"/>
+	<field name="costos" class="java.lang.Double"/>
+	<field name="costoneto" class="java.lang.Double"/>
+	<field name="utilidad" class="java.lang.Double"/>
+	<field name="util" class="java.lang.Double"/>
+	<columnHeader>
+		<band height="13">
+			<rectangle>
+				<reportElement x="53" y="0" width="502" height="11" forecolor="#FFFFFF" backcolor="#0066FF" uuid="83d259ff-10ed-4df3-8d73-202cd2c7c5bc"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="457" y="0" width="52" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="fca4a423-4459-4065-8dfd-3a52324f34ed"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[% Util]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="311" y="0" width="80" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="39a117a2-c39d-46c4-8296-7753ca5468b3"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CostoTotal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="0" width="96" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="329186c6-2c44-46d6-8bce-a69c103b64f1"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CostoMat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="391" y="0" width="66" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="59a6ab23-c2ea-406a-8f0f-d740b1c363f0"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Utilidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="53" y="0" width="65" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="19c9aab5-45d7-4bc1-8996-9a801c724d79"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pares]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="118" y="0" width="97" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="54074ae5-1c0e-4813-b20a-0a046d2435b2"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vta Nta]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<rectangle radius="3">
+				<reportElement x="0" y="0" width="555" height="12" forecolor="#FFFFFF" backcolor="#D6D6D6" uuid="9e41edb9-6864-40be-8b11-25b4b53d9aa5"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="0" width="400" height="12" uuid="116d4317-e459-40c8-af86-a1c9c37e60a1"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="53" y="12" width="65" height="11" uuid="fbaac4ae-b234-4723-b41f-cd2f0af66e65"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pares}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="118" y="12" width="97" height="11" uuid="d2ed0329-b2f1-497f-a5f8-fed6b99463ce"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="215" y="12" width="96" height="11" uuid="807ef4aa-5d0d-4e73-8e6b-1a106e3ae1ce"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{costos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="311" y="12" width="80" height="11" uuid="6b97861a-5dc0-4f82-9b84-c6aff1cc4008"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{costoneto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="391" y="12" width="66" height="11" uuid="817dfec8-7384-4c08-aeb1-3bbcf559cbc5"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{utilidad}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="457" y="12" width="43" height="11" uuid="77e53e39-3707-4243-8e7d-9c3a234e51d6"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{util}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="500" y="12" width="10" height="11" uuid="f6b42960-1926-46e9-ac0c-c0fa627e767f"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

@@ -48,6 +48,11 @@ order by pares desc]]>
 	<variable name="gastosub" class="java.math.BigDecimal"/>
 	<variable name="tpares" class="java.lang.Short" calculation="Sum"/>
 	<variable name="costoso" class="java.lang.Float"/>
+	<variable name="sumpares" class="java.lang.Short" calculation="Sum"/>
+	<variable name="sumvta" class="java.lang.Float" calculation="Sum"/>
+	<variable name="sumcostos" class="java.lang.Float" calculation="Sum"/>
+	<variable name="sumcostoneto" class="java.lang.Float" calculation="Sum"/>
+	<variable name="sumutilidad" class="java.lang.Float" calculation="Sum"/>
 	<detail>
 		<band height="13">
 			<rectangle radius="3">
@@ -89,10 +94,14 @@ order by pares desc]]>
 				<returnValue subreportVariable="costotalso" toVariable="costotots"/>
 				<returnValue subreportVariable="costnetoso" toVariable="costonetos"/>
 				<returnValue subreportVariable="utilidadeso" toVariable="utilidads"/>
+				<returnValue subreportVariable="pareso" toVariable="sumpares" calculation="Sum"/>
+				<returnValue subreportVariable="vtanetaso" toVariable="sumvta" calculation="Sum"/>
+				<returnValue subreportVariable="costotalso" toVariable="sumcostos" calculation="Sum"/>
+				<returnValue subreportVariable="costnetoso" toVariable="sumcostoneto" calculation="Sum"/>
+				<returnValue subreportVariable="utilidadeso" toVariable="sumutilidad" calculation="Sum"/>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "producto_detalle_c.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
-		<band height="8"/>
 		<band height="10">
 			<textField pattern="#,##0.00">
 				<reportElement x="483" y="0" width="49" height="8" uuid="7357017f-9dd2-4f10-bf60-fbbe9225bb7b"/>

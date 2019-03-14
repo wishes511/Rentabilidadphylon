@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="67d312c1-c93b-45de-b288-e6f7dc979a52">
-	<property name="ireport.zoom" value="1.4641000000000035"/>
+	<property name="ireport.zoom" value="1.2100000000000029"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="f1" class="java.lang.String">
@@ -16,14 +16,13 @@
 		<defaultValueExpression><![CDATA["C:\\Users\\gateway1-\\Documents\\NetBeansProjects\\Rentabilidadphylon\\src\\rentabilidadphylon\\"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select nombre,sum(totalpares) as 'pares' from facturas f
-join RACobranzaPhylon.dbo.Clientes c on f.numcliente=c.NumCliente
-where (f.estatus='F') and Nombre like '%%' and CONVERT(date,fecha) between $P{f1} and $P{f2}
-group by nombre
-order by pares DESC]]>
+		<![CDATA[select sum(pares) as 'pares',sum(vta) as vta, sum(costos) as 'costo', sum(costoneto) as 'costoneto', sum(utilidad) as'utilidad' from datos]]>
 	</queryString>
-	<field name="nombre" class="java.lang.String"/>
 	<field name="pares" class="java.lang.Integer"/>
+	<field name="vta" class="java.lang.Double"/>
+	<field name="costo" class="java.lang.Double"/>
+	<field name="costoneto" class="java.lang.Double"/>
+	<field name="utilidad" class="java.lang.Double"/>
 	<variable name="pares" class="java.lang.Short" calculation="Sum"/>
 	<variable name="precio" class="java.lang.Float" calculation="Sum"/>
 	<variable name="vtaneta" class="java.lang.Float" calculation="Sum"/>
@@ -34,6 +33,21 @@ order by pares DESC]]>
 	<variable name="utilidad" class="java.lang.Float" calculation="Sum"/>
 	<variable name="util" class="java.lang.Float">
 		<variableExpression><![CDATA[($V{utilidad}/$V{vtaneta})*100]]></variableExpression>
+	</variable>
+	<variable name="pares_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{pares}]]></variableExpression>
+	</variable>
+	<variable name="vta_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{vta}]]></variableExpression>
+	</variable>
+	<variable name="costo_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{costo}]]></variableExpression>
+	</variable>
+	<variable name="costoneto_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{costoneto}]]></variableExpression>
+	</variable>
+	<variable name="utilidad_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{utilidad}]]></variableExpression>
 	</variable>
 	<background>
 		<band splitType="Stretch"/>
@@ -89,53 +103,11 @@ order by pares DESC]]>
 		</band>
 	</title>
 	<detail>
-		<band splitType="Stretch">
+		<band height="10">
 			<subreport>
-				<reportElement x="0" y="0" width="555" height="0" uuid="077e0f8b-e6e5-433b-a0de-793c88903690"/>
-				<subreportParameter name="f1">
-					<subreportParameterExpression><![CDATA[$P{f1}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="f2">
-					<subreportParameterExpression><![CDATA[$P{f2}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="nombre">
-					<subreportParameterExpression><![CDATA[$F{nombre}]]></subreportParameterExpression>
-				</subreportParameter>
+				<reportElement x="0" y="0" width="572" height="10" uuid="9ec69011-6320-49c0-8eec-9e2ee875cfaf"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<returnValue subreportVariable="pares" toVariable="pares"/>
-				<returnValue subreportVariable="vtanetas" toVariable="vtaneta"/>
-				<returnValue subreportVariable="costotots" toVariable="costotot"/>
-				<returnValue subreportVariable="costonetos" toVariable="costoneto"/>
-				<returnValue subreportVariable="utilidads" toVariable="utilidad"/>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "head_detalle_cond.jasper"]]></subreportExpression>
-			</subreport>
-		</band>
-		<band>
-			<subreport>
-				<reportElement x="10" y="0" width="562" height="0" uuid="b1fd1941-7341-4605-889e-a1b06921c5e6"/>
-				<subreportParameter name="pares">
-					<subreportParameterExpression><![CDATA[$V{pares}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="vtas">
-					<subreportParameterExpression><![CDATA[$V{vtaneta}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="costotal">
-					<subreportParameterExpression><![CDATA[$V{costotot}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="costoneto">
-					<subreportParameterExpression><![CDATA[$V{costoneto}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="utilidad">
-					<subreportParameterExpression><![CDATA[$V{utilidad}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="util">
-					<subreportParameterExpression><![CDATA[$V{util}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="cliente">
-					<subreportParameterExpression><![CDATA[$F{nombre}]]></subreportParameterExpression>
-				</subreportParameter>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "insertabla.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "condensadocondensado.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>
@@ -153,6 +125,49 @@ order by pares DESC]]>
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="15" splitType="Stretch"/>
+		<band height="23" splitType="Stretch">
+			<textField pattern="#,##0">
+				<reportElement x="63" y="4" width="65" height="19" uuid="e85b1e6e-d32f-4470-9d96-e4ed7f7f2bce"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{pares_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="128" y="4" width="97" height="19" uuid="ae1a727e-83ed-43cb-b9cb-af9c46ec3e7d"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{vta_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="225" y="4" width="96" height="19" uuid="f09ccdc3-31e2-49b0-a1c3-43e39fc14f0c"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{costo_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="321" y="4" width="80" height="19" uuid="6be2db36-7b7b-41b0-a92a-13d1226a0d21"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{costoneto_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="401" y="4" width="66" height="19" uuid="76a70b06-600b-444f-bde1-5a69c1dfbfa8"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{utilidad_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="4" width="61" height="19" uuid="7aa48e88-dba3-4c06-b35f-998eee954780"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[Total Reporte:    ]]></text>
+			</staticText>
+		</band>
 	</summary>
 </jasperReport>

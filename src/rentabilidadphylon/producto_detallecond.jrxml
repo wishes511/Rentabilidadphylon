@@ -76,9 +76,9 @@ where (f.estatus='F') and Nombre = $P{nombre} and  L.Descripcion=$P{linea} and y
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "preciopond_det.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
-		<band height="6">
+		<band>
 			<subreport>
-				<reportElement x="30" y="0" width="524" height="3" uuid="afd55e07-f152-467a-8a03-565c351ca7bb"/>
+				<reportElement x="30" y="0" width="524" height="0" uuid="afd55e07-f152-467a-8a03-565c351ca7bb"/>
 				<subreportParameter name="precio">
 					<subreportParameterExpression><![CDATA[$V{precioso}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -111,7 +111,7 @@ where (f.estatus='F') and Nombre = $P{nombre} and  L.Descripcion=$P{linea} and y
 				<returnValue subreportVariable="costotals" toVariable="sumcostos" calculation="Sum"/>
 				<returnValue subreportVariable="costnetos" toVariable="sumgastos" calculation="Sum"/>
 				<returnValue subreportVariable="utilidades" toVariable="sumutilidad" calculation="Sum"/>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "punto_detalle.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "punto_detallecondensado.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>

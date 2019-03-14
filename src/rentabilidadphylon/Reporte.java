@@ -66,6 +66,7 @@ public class Reporte extends javax.swing.JInternalFrame implements Runnable{
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         loading = new javax.swing.JLabel();
+        jp1 = new javax.swing.JPanel();
         f1 = new com.toedter.calendar.JDateChooser();
         f2 = new com.toedter.calendar.JDateChooser();
         t6 = new javax.swing.JRadioButton();
@@ -82,7 +83,6 @@ public class Reporte extends javax.swing.JInternalFrame implements Runnable{
         t5 = new javax.swing.JRadioButton();
         t4 = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
-        jp1 = new javax.swing.JPanel();
 
         setClosable(true);
         setMaximizable(true);
@@ -94,6 +94,9 @@ public class Reporte extends javax.swing.JInternalFrame implements Runnable{
         loading.setIcon(new javax.swing.ImageIcon("C:\\af\\Rentabilidad\\images\\cargando.gif")); // NOI18N
         getContentPane().add(loading, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 210, -1, -1));
 
+        jp1.setOpaque(false);
+        getContentPane().add(jp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 570));
+
         f1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         getContentPane().add(f1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 200, 30));
 
@@ -102,6 +105,11 @@ public class Reporte extends javax.swing.JInternalFrame implements Runnable{
 
         t6.setFont(new java.awt.Font("Consolas", 1, 12)); // NOI18N
         t6.setText("Condensado Utilidad");
+        t6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                t6ActionPerformed(evt);
+            }
+        });
         getContentPane().add(t6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 430, 160, 30));
 
         all1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -227,9 +235,6 @@ public class Reporte extends javax.swing.JInternalFrame implements Runnable{
         jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jp1.setOpaque(false);
-        getContentPane().add(jp1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 570));
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -249,6 +254,7 @@ public class Reporte extends javax.swing.JInternalFrame implements Runnable{
         all1.setSelected(true);
         combo.setEnabled(false);
         t6.setVisible(false);
+        t4.setSelected(true);
     }//GEN-LAST:event_t3ActionPerformed
 
     private void all1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_all1ActionPerformed
@@ -311,6 +317,10 @@ public class Reporte extends javax.swing.JInternalFrame implements Runnable{
         t4.requestFocus();
     }//GEN-LAST:event_all1MouseClicked
 
+    private void t6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_t6ActionPerformed
+
     private void setreport() {
         String nombre = (all1.isSelected()) ? "" : combo.getSelectedItem().toString();
         String tipo = (t1.isSelected()) ? "index" : (t2.isSelected()) ? "indexAg" : "indexlin";
@@ -332,9 +342,18 @@ public class Reporte extends javax.swing.JInternalFrame implements Runnable{
             JasperViewer ver = new JasperViewer(print, false); //despliegue de reporte
             loading.setVisible(false);
             jp1.setVisible(false);
-           // JOptionPane.showMessageDialog(null, "");
+            if(tiporeporte.equals("clientecond")){
+                ver.setVisible(false);
+                
+             jasper = (JasperReport) JRLoader.loadObject(getClass().getResource("indexclientedatos.jasper"));
+             print = JasperFillManager.fillReport(jasper, parametross, pdb.getconexion());
+             ver = new JasperViewer(print, false); 
+             ver.setVisible(true);
+            }else{
             ver.setTitle("Rentabilidad");
             ver.setVisible(true);
+            }
+            
         } catch (NullPointerException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "No puedes dejar las fechas vacias!, Verificalo.");
