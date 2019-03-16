@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="67d312c1-c93b-45de-b288-e6f7dc979a52">
-	<property name="ireport.zoom" value="1.7715610000000037"/>
+	<property name="ireport.zoom" value="1.9487171000000014"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="f1" class="java.lang.String">
@@ -33,6 +33,13 @@ order by pares DESC]]>
 	<variable name="gastos" class="java.lang.Float" calculation="Sum"/>
 	<variable name="costoneto" class="java.lang.Float" calculation="Sum"/>
 	<variable name="utilidad" class="java.lang.Float" calculation="Sum"/>
+	<variable name="totalvta" class="java.lang.Float" calculation="Sum"/>
+	<variable name="totalcosto" class="java.lang.Float" calculation="Sum"/>
+	<variable name="totalneto" class="java.lang.Float" calculation="Sum"/>
+	<variable name="totalutilidad" class="java.lang.Float" calculation="Sum"/>
+	<variable name="pares_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{pares}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -199,6 +206,10 @@ order by pares DESC]]>
 				<returnValue subreportVariable="sumcostos" toVariable="costotot"/>
 				<returnValue subreportVariable="sumcostoneto" toVariable="costoneto"/>
 				<returnValue subreportVariable="sumutilidad" toVariable="utilidad"/>
+				<returnValue subreportVariable="sumvta" toVariable="totalvta" calculation="Sum"/>
+				<returnValue subreportVariable="sumcostos" toVariable="totalcosto" calculation="Sum"/>
+				<returnValue subreportVariable="sumcostoneto" toVariable="totalneto" calculation="Sum"/>
+				<returnValue subreportVariable="sumutilidad" toVariable="totalutilidad" calculation="Sum"/>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "headerp.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
@@ -284,6 +295,49 @@ order by pares DESC]]>
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="33" splitType="Stretch"/>
+		<band height="36" splitType="Stretch">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="337" y="11" width="65" height="20" uuid="953e8f67-0a92-4306-9e92-eefb99d2dc69"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalcosto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="492" y="11" width="62" height="20" uuid="64e20ff3-6551-4ce1-9ae0-ffd76043cdd0"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalutilidad}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="235" y="11" width="73" height="20" uuid="96a64351-36f1-4dd4-9861-ded7fe57c0ba"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalvta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="64" y="11" width="100" height="20" uuid="acc3bb43-aa75-48c1-b22c-6c72935c0b3c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de reporte: ]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="431" y="11" width="51" height="20" uuid="2de5fa09-914c-48bd-a4ed-af43b0544eeb"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalneto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="164" y="11" width="61" height="20" uuid="49be7e57-8920-44df-8b7d-6406f4d11cb8"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{pares_1}]]></textFieldExpression>
+			</textField>
+		</band>
 	</summary>
 </jasperReport>

@@ -18,7 +18,7 @@
 	<queryString>
 		<![CDATA[select nombre,sum(totalpares) as 'pares' from facturas f
 join RACobranzaPhylon.dbo.Clientes c on f.numcliente=c.NumCliente
-where (f.estatus='F') and Nombre like '%%' and CONVERT(date,fecha) between $P{f1} and $P{f2}
+where (f.estatus='F') and Nombre like '%$P!{nombre}%' and CONVERT(date,fecha) between $P{f1} and $P{f2}
 group by nombre
 order by pares DESC]]>
 	</queryString>
@@ -32,6 +32,14 @@ order by pares DESC]]>
 	<variable name="gastos" class="java.lang.Float" calculation="Sum"/>
 	<variable name="costoneto" class="java.lang.Float" calculation="Sum"/>
 	<variable name="utilidad" class="java.lang.Float" calculation="Sum"/>
+	<variable name="totalcosto" class="java.lang.Float" calculation="Sum"/>
+	<variable name="totalvta" class="java.lang.Float" calculation="Sum"/>
+	<variable name="totalneto" class="java.lang.Float" calculation="Sum"/>
+	<variable name="totalutilidad" class="java.lang.Float" calculation="Sum"/>
+	<variable name="totalpares" class="java.lang.Short" calculation="Sum"/>
+	<variable name="pares_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{pares}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -184,6 +192,11 @@ order by pares DESC]]>
 				<returnValue subreportVariable="costotots" toVariable="costotot"/>
 				<returnValue subreportVariable="costonetos" toVariable="costoneto"/>
 				<returnValue subreportVariable="utilidads" toVariable="utilidad"/>
+				<returnValue subreportVariable="vtanetas" toVariable="totalvta" calculation="Sum"/>
+				<returnValue subreportVariable="costotots" toVariable="totalcosto" calculation="Sum"/>
+				<returnValue subreportVariable="costonetos" toVariable="totalneto" calculation="Sum"/>
+				<returnValue subreportVariable="utilidads" toVariable="totalutilidad" calculation="Sum"/>
+				<returnValue subreportVariable="pares" toVariable="totalpares" calculation="Sum"/>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "head_detalle.jasper"]]></subreportExpression>
 			</subreport>
 			<textField>
@@ -201,42 +214,42 @@ order by pares DESC]]>
 					<pen lineWidth="0.0"/>
 				</graphicElement>
 			</rectangle>
-			<textField pattern="#,##0">
+			<textField pattern="#,##0" isBlankWhenNull="true">
 				<reportElement x="81" y="0" width="37" height="12" uuid="890483ee-236d-4c0b-95ff-52895bba5f0c"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{pares}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement x="152" y="0" width="63" height="12" uuid="9075c875-c1cd-4db4-aa33-7074e5d856e4"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{vtaneta}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement x="268" y="0" width="43" height="12" uuid="9a6c36a2-c078-4fbd-8602-facb8acecfde"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{costotot}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement x="350" y="0" width="41" height="12" uuid="98be4558-1345-4bf2-99db-1567f92c2794"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{costoneto}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement x="391" y="0" width="66" height="12" uuid="85669cfa-2c3f-4d85-8185-6c0038390099"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{utilidad}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement x="457" y="0" width="37" height="12" uuid="b55ca078-4fc8-43c7-9aa9-dbca155c6f4b"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
@@ -276,6 +289,49 @@ order by pares DESC]]>
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="33" splitType="Stretch"/>
+		<band height="33" splitType="Stretch">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="254" y="13" width="65" height="20" uuid="a056d5dc-5bb7-4151-9c7e-797fa170db5b"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalcosto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="409" y="13" width="62" height="20" uuid="3469fbd3-1d71-4183-9afb-4626c7cc9d14"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalutilidad}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="152" y="13" width="73" height="20" uuid="e43652aa-0363-4ed3-a34b-2a647f476354"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalvta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="13" width="81" height="20" uuid="bae0226a-0099-4911-8064-4c2f41713b63"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de reporte:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="348" y="13" width="51" height="20" uuid="b4e2c25e-cb1e-4edb-96f7-e5dd41781688"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalneto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0" isBlankWhenNull="true">
+				<reportElement x="81" y="13" width="67" height="20" uuid="4c32bf22-66f8-4a31-bcdd-79be1dd745bd"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{pares_1}]]></textFieldExpression>
+			</textField>
+		</band>
 	</summary>
 </jasperReport>
