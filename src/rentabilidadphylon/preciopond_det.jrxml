@@ -23,7 +23,7 @@
 	</parameter>
 	<queryString>
 		<![CDATA[select sum(df.TotalPares) as 'pares',
-round(case when (salida) =0 then (df.precio) when (salida) =2 then (df.precio*1.16) else (df.precio)/1.16 end,2) as 'precio'
+round(case when (salida) =0 then (df.precio) when (salida) =2 then (df.precio) else (df.precio)/1.16 end,2) as 'precio'
 from facturas f
 join DFacturas df on df.Factura=f.Factura
 join Lineas l on df.Linea = l.linea
