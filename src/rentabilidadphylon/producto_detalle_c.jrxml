@@ -68,7 +68,7 @@ where (f.estatus='F') and Nombre = $P{nombre} and  L.Descripcion=$P{linea} and y
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<returnValue subreportVariable="costos" toVariable="costoso"/>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "punto_detalle_c.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\af\\Rentabilidad\\reportes\\punto_detalle_c.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 		<band>
@@ -94,7 +94,7 @@ where (f.estatus='F') and Nombre = $P{nombre} and  L.Descripcion=$P{linea} and y
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<returnValue subreportVariable="precios" toVariable="precioso"/>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "preciopond.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\af\\Rentabilidad\\reportes\\preciopond.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 		<band>
@@ -133,7 +133,7 @@ where (f.estatus='F') and Nombre = $P{nombre} and  L.Descripcion=$P{linea} and y
 				<returnValue subreportVariable="costotaleso" toVariable="costotalso" calculation="Sum"/>
 				<returnValue subreportVariable="costonetoso" toVariable="costnetoso" calculation="Sum"/>
 				<returnValue subreportVariable="utilidadso" toVariable="utilidadeso" calculation="Sum"/>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "body_p.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\af\\Rentabilidad\\reportes\\body_p.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>

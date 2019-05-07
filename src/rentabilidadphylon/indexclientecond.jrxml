@@ -107,7 +107,7 @@ order by pares DESC]]>
 				<returnValue subreportVariable="costotots" toVariable="costotot"/>
 				<returnValue subreportVariable="costonetos" toVariable="costoneto"/>
 				<returnValue subreportVariable="utilidads" toVariable="utilidad"/>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "head_detalle_cond.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\af\\Rentabilidad\\reportes\\head_detalle_cond.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 		<band>
@@ -135,7 +135,7 @@ order by pares DESC]]>
 					<subreportParameterExpression><![CDATA[$F{nombre}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "insertabla.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\af\\Rentabilidad\\reportes\\insertabla.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>

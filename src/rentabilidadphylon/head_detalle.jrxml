@@ -68,7 +68,7 @@ group by l.Descripcion]]>
 				<returnValue subreportVariable="sumcostos" toVariable="costotots" calculation="Sum"/>
 				<returnValue subreportVariable="sumgastos" toVariable="costonetos" calculation="Sum"/>
 				<returnValue subreportVariable="sumutilidad" toVariable="utilidads" calculation="Sum"/>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "producto_detalle.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\af\\Rentabilidad\\reportes\\producto_detalle.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>

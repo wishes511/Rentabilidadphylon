@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ce6cf3bd-6f73-4b59-9edb-7c9a9e485419">
 	<property name="ireport.zoom" value="1.7715610000000104"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="161"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="f1" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -230,7 +230,7 @@ order by pares desc]]>
 				<returnValue subreportVariable="costotalso" toVariable="totalcosto" calculation="Sum"/>
 				<returnValue subreportVariable="costnetoso" toVariable="totalneto" calculation="Sum"/>
 				<returnValue subreportVariable="utilidadeso" toVariable="totalutilidad" calculation="Sum"/>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "producto_detalle_c_l.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:/af/Rentabilidad/reportes/producto_detalle_c_l.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 		<band height="10">

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="67d312c1-c93b-45de-b288-e6f7dc979a52">
 	<property name="ireport.zoom" value="1.9487171000000014"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.x" value="412"/>
+	<property name="ireport.y" value="5"/>
 	<parameter name="f1" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -13,7 +13,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:\\Users\\gateway1-\\Documents\\NetBeansProjects\\Rentabilidadphylon\\src\\rentabilidadphylon\\"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["C:\\af\\Rentabilidad\\reportes\\"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[select nombre,c.numcliente,sum(totalpares) as 'pares' from facturas f
@@ -210,7 +210,7 @@ order by pares DESC]]>
 				<returnValue subreportVariable="sumcostos" toVariable="totalcosto" calculation="Sum"/>
 				<returnValue subreportVariable="sumcostoneto" toVariable="totalneto" calculation="Sum"/>
 				<returnValue subreportVariable="sumutilidad" toVariable="totalutilidad" calculation="Sum"/>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "headerp.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\af\\Rentabilidad\\reportes\\headerp.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 		<band height="14">
@@ -255,7 +255,7 @@ order by pares DESC]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{utilidad}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement x="532" y="4" width="23" height="10" uuid="d997978e-c2d4-4552-92ac-7ddbfeaf3c84"/>
 				<textElement>
 					<font size="7" isBold="true"/>

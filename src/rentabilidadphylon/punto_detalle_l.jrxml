@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="555" pageHeight="802" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="b91adbf5-2f88-4cf4-81e5-c8d89b8aef07">
 	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="20"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="f1" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -81,7 +81,7 @@ where (f.estatus='F') and L.Descripcion=$P{linea} and cost.id_producto=$P{produc
 				<returnValue subreportVariable="gastos" toVariable="gastos" calculation="Sum"/>
 				<returnValue subreportVariable="costonetos" toVariable="costnetos" calculation="Sum"/>
 				<returnValue subreportVariable="utilidades" toVariable="utilidades" calculation="Sum"/>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "paresxpunto_l.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:/af/Rentabilidad/reportes/paresxpunto_l.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>

@@ -77,7 +77,7 @@ where (f.estatus='F') and L.Descripcion=$P{linea} and year(df.fecha)=year($P{f1}
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<returnValue subreportVariable="precios" toVariable="precios" calculation="Sum"/>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "preciopond_precio_l.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:/af/Rentabilidad/reportes/preciopond_precio_l.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>

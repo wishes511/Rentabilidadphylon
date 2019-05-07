@@ -107,7 +107,7 @@
 			<subreport>
 				<reportElement x="0" y="0" width="572" height="10" uuid="9ec69011-6320-49c0-8eec-9e2ee875cfaf"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "condensadocondensado.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\af\\Rentabilidad\\reportes\\condensadocondensado.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>
@@ -140,21 +140,21 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$V{vta_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement x="225" y="4" width="96" height="19" uuid="f09ccdc3-31e2-49b0-a1c3-43e39fc14f0c"/>
 				<textElement textAlignment="Center">
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{costo_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement x="321" y="4" width="80" height="19" uuid="6be2db36-7b7b-41b0-a92a-13d1226a0d21"/>
 				<textElement textAlignment="Center">
 					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{costoneto_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,##0.00">
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
 				<reportElement x="401" y="4" width="66" height="19" uuid="76a70b06-600b-444f-bde1-5a69c1dfbfa8"/>
 				<textElement textAlignment="Center">
 					<font size="11"/>

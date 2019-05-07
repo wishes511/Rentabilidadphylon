@@ -91,7 +91,7 @@ and cost.punto =$P{punto}
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<returnValue subreportVariable="costos" toVariable="costos" calculation="Sum"/>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "costoreal_l.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:/af/Rentabilidad/reportes/costoreal_l.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>

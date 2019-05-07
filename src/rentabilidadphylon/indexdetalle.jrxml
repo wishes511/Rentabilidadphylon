@@ -197,7 +197,7 @@ order by pares DESC]]>
 				<returnValue subreportVariable="costonetos" toVariable="totalneto" calculation="Sum"/>
 				<returnValue subreportVariable="utilidads" toVariable="totalutilidad" calculation="Sum"/>
 				<returnValue subreportVariable="pares" toVariable="totalpares" calculation="Sum"/>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "head_detalle.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\af\\Rentabilidad\\reportes\\head_detalle.jasper"]]></subreportExpression>
 			</subreport>
 			<textField>
 				<reportElement x="0" y="0" width="215" height="15" forecolor="#000000" backcolor="#000000" uuid="11ee8472-d42a-40d3-8f88-a18248f2bc7e"/>

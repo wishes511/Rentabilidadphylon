@@ -69,7 +69,7 @@ where (f.estatus='F') and Nombre = $P{nombre} and L.Descripcion=$P{linea} and co
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<returnValue subreportVariable="costos" toVariable="costos" calculation="Sum"/>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "paresxpunto_c.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\af\\Rentabilidad\\reportes\\paresxpunto_c.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>

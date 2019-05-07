@@ -78,7 +78,7 @@ where (f.estatus='F') and Nombre = $P{nombre} and L.Descripcion=$P{linea} and ye
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<returnValue subreportVariable="precios" toVariable="precios" calculation="Sum"/>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "preciopond_precio.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\af\\Rentabilidad\\reportes\\preciopond_precio.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>

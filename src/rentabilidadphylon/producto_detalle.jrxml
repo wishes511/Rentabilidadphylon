@@ -73,7 +73,7 @@ where (f.estatus='F') and Nombre = $P{nombre} and  L.Descripcion=$P{linea} and y
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<returnValue subreportVariable="precios" toVariable="precioso"/>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "preciopond_det.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\af\\Rentabilidad\\reportes\\preciopond_det.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 		<band height="15">
@@ -125,7 +125,7 @@ where (f.estatus='F') and Nombre = $P{nombre} and  L.Descripcion=$P{linea} and y
 				<returnValue subreportVariable="costotals" toVariable="sumcostos" calculation="Sum"/>
 				<returnValue subreportVariable="costnetos" toVariable="sumgastos" calculation="Sum"/>
 				<returnValue subreportVariable="utilidades" toVariable="sumutilidad" calculation="Sum"/>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "punto_detalle.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\af\\Rentabilidad\\reportes\\punto_detalle.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 		<band height="11">

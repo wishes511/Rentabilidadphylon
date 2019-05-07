@@ -207,7 +207,7 @@ order by sum(df.totalpares) desc]]>
 				<returnValue subreportVariable="sumcostoneto" toVariable="totalneto" calculation="Sum"/>
 				<returnValue subreportVariable="sumutilidad" toVariable="totalutilidad" calculation="Sum"/>
 				<returnValue subreportVariable="sumpares" toVariable="totalpares" calculation="Sum"/>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "producto_detalle_l.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:/af/Rentabilidad/reportes/producto_detalle_l.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 		<band height="11">

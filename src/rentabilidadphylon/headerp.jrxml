@@ -99,7 +99,7 @@ order by pares desc]]>
 				<returnValue subreportVariable="costotalso" toVariable="sumcostos" calculation="Sum"/>
 				<returnValue subreportVariable="costnetoso" toVariable="sumcostoneto" calculation="Sum"/>
 				<returnValue subreportVariable="utilidadeso" toVariable="sumutilidad" calculation="Sum"/>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "producto_detalle_c.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\af\\Rentabilidad\\reportes\\producto_detalle_c.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 		<band height="10">

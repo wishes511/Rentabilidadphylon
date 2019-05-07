@@ -108,7 +108,7 @@ and cost.punto =$P{punto}
 				<returnValue subreportVariable="gastoso" toVariable="gastos" calculation="Sum"/>
 				<returnValue subreportVariable="costnetoso" toVariable="costonetos" calculation="Sum"/>
 				<returnValue subreportVariable="utilidadeso" toVariable="utilidades" calculation="Sum"/>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "body_detalle.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:\\af\\Rentabilidad\\reportes\\body_detalle.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>

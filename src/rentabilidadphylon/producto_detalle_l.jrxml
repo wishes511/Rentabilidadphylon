@@ -72,7 +72,7 @@ where (f.estatus='F') and  L.Descripcion=$P{linea} and year(df.fecha)=year($P{f1
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<returnValue subreportVariable="precios" toVariable="precioso"/>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "preciopond_det_l.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:/af/Rentabilidad/reportes/preciopond_det_l.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 		<band height="15">
@@ -130,7 +130,7 @@ where (f.estatus='F') and  L.Descripcion=$P{linea} and year(df.fecha)=year($P{f1
 				<returnValue subreportVariable="costotals" toVariable="sumcostos" calculation="Sum"/>
 				<returnValue subreportVariable="costnetos" toVariable="sumcostoneto" calculation="Sum"/>
 				<returnValue subreportVariable="utilidades" toVariable="sumutilidad" calculation="Sum"/>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "punto_detalle_l.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["C:/af/Rentabilidad/reportes/punto_detalle_l.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 		<band height="11">
