@@ -113,26 +113,26 @@ order by pares DESC]]>
 		<band>
 			<subreport>
 				<reportElement x="10" y="0" width="562" height="0" uuid="b1fd1941-7341-4605-889e-a1b06921c5e6"/>
-				<subreportParameter name="pares">
-					<subreportParameterExpression><![CDATA[$V{pares}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="vtas">
-					<subreportParameterExpression><![CDATA[$V{vtaneta}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="costotal">
 					<subreportParameterExpression><![CDATA[$V{costotot}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cliente">
+					<subreportParameterExpression><![CDATA[$F{nombre}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="costoneto">
 					<subreportParameterExpression><![CDATA[$V{costoneto}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="utilidad">
-					<subreportParameterExpression><![CDATA[$V{utilidad}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="util">
 					<subreportParameterExpression><![CDATA[$V{util}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="cliente">
-					<subreportParameterExpression><![CDATA[$F{nombre}]]></subreportParameterExpression>
+				<subreportParameter name="vtas">
+					<subreportParameterExpression><![CDATA[$V{vtaneta}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="pares">
+					<subreportParameterExpression><![CDATA[$V{pares}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="utilidad">
+					<subreportParameterExpression><![CDATA[$V{utilidad}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA["C:\\af\\Rentabilidad\\reportes\\insertabla.jasper"]]></subreportExpression>

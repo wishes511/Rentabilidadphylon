@@ -47,6 +47,8 @@ where (f.estatus='F') and Nombre = $P{nombre} and  L.Descripcion=$P{linea} and y
 	<variable name="gastoso" class="java.lang.Float" calculation="Sum"/>
 	<variable name="costnetoso" class="java.lang.Float" calculation="Sum"/>
 	<variable name="utilidadeso" class="java.lang.Float" calculation="Sum"/>
+	<variable name="variable1" class="java.lang.String"/>
+	<variable name="gastoneto" class="java.lang.Float" calculation="Sum"/>
 	<detail>
 		<band splitType="Stretch">
 			<subreport>
@@ -133,6 +135,7 @@ where (f.estatus='F') and Nombre = $P{nombre} and  L.Descripcion=$P{linea} and y
 				<returnValue subreportVariable="costotaleso" toVariable="costotalso" calculation="Sum"/>
 				<returnValue subreportVariable="costonetoso" toVariable="costnetoso" calculation="Sum"/>
 				<returnValue subreportVariable="utilidadso" toVariable="utilidadeso" calculation="Sum"/>
+				<returnValue subreportVariable="gastoneto" toVariable="gastoneto" calculation="Sum"/>
 				<subreportExpression><![CDATA["C:\\af\\Rentabilidad\\reportes\\body_p.jasper"]]></subreportExpression>
 			</subreport>
 		</band>

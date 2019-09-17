@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="67d312c1-c93b-45de-b288-e6f7dc979a52">
-	<property name="ireport.zoom" value="1.9487171000000014"/>
-	<property name="ireport.x" value="412"/>
-	<property name="ireport.y" value="5"/>
+	<property name="ireport.zoom" value="1.4641000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="f1" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -40,6 +40,8 @@ order by pares DESC]]>
 	<variable name="pares_1" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{pares}]]></variableExpression>
 	</variable>
+	<variable name="gastoneto" class="java.lang.Float"/>
+	<variable name="totalgastoneto" class="java.lang.Float" calculation="Sum"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -102,81 +104,88 @@ order by pares DESC]]>
 				<reportElement x="0" y="0" width="555" height="11" forecolor="#FFFFFF" backcolor="#0066FF" uuid="e49d0efd-acaf-4d33-9b32-61eec5bb026b"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="194" y="0" width="42" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="353125e5-0a90-4e69-91e5-334f1c6594f0"/>
+				<reportElement x="194" y="0" width="38" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="353125e5-0a90-4e69-91e5-334f1c6594f0"/>
 				<textElement textAlignment="Center">
-					<font size="8" isBold="true"/>
+					<font size="7" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Precio]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="236" y="0" width="49" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="fafb2d9f-0599-4811-9f42-d2f761cae5bd"/>
+				<reportElement x="232" y="0" width="49" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="fafb2d9f-0599-4811-9f42-d2f761cae5bd"/>
 				<textElement textAlignment="Center">
-					<font size="8" isBold="true"/>
+					<font size="7" isBold="true"/>
 				</textElement>
 				<text><![CDATA[VtaNeta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="285" y="0" width="49" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="3765bc0c-c04e-46aa-9582-dbf1fead8425"/>
+				<reportElement x="281" y="0" width="40" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="3765bc0c-c04e-46aa-9582-dbf1fead8425"/>
 				<textElement textAlignment="Center">
-					<font size="8" isBold="true"/>
+					<font size="7" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Costo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="334" y="0" width="49" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="96d2dc27-619b-45b8-8100-8b94e95744a6"/>
+				<reportElement x="321" y="0" width="46" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="96d2dc27-619b-45b8-8100-8b94e95744a6"/>
 				<textElement textAlignment="Center">
-					<font size="8" isBold="true"/>
+					<font size="7" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CostoMat]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="383" y="0" width="49" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="f1169099-310b-481e-97e4-b26b5ed27d34"/>
+				<reportElement x="367" y="0" width="35" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="f1169099-310b-481e-97e4-b26b5ed27d34"/>
 				<textElement textAlignment="Center">
-					<font size="8" isBold="true"/>
+					<font size="7" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Gastos]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="432" y="0" width="51" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="939dc578-84f9-4102-b67e-3be297d175c7"/>
+				<reportElement x="442" y="0" width="41" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="939dc578-84f9-4102-b67e-3be297d175c7"/>
 				<textElement textAlignment="Center">
-					<font size="8" isBold="true"/>
+					<font size="7" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CostoTotal]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="483" y="0" width="49" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="52ead0da-1ded-462b-92ae-1c8f0d14685e"/>
 				<textElement textAlignment="Center">
-					<font size="8" isBold="true"/>
+					<font size="7" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Utilidad]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="164" y="0" width="30" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="c51548ab-9379-4228-916c-50d4d09523eb"/>
 				<textElement textAlignment="Center">
-					<font size="8" isBold="true"/>
+					<font size="7" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Pares]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="60" y="0" width="104" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="07cb92ac-054f-4cbe-94f5-b5420608c4b0"/>
 				<textElement textAlignment="Center">
-					<font size="8" isBold="true"/>
+					<font size="7" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Descripción]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="36" y="0" width="24" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="f938bb3e-4c82-48d0-80f2-7c7ccb18d4ea"/>
 				<textElement>
-					<font size="8" isBold="true"/>
+					<font size="7" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Suela]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="532" y="0" width="23" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="c2a98118-7b3e-44d5-a938-0ad2afa0dec9"/>
+				<reportElement x="532" y="0" width="36" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="c2a98118-7b3e-44d5-a938-0ad2afa0dec9"/>
 				<textElement textAlignment="Center">
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="42" height="11" forecolor="#FFFFFF" backcolor="#333333" uuid="a55b34da-eb88-443a-abb9-7381da717a25"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gasto Neto]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -210,6 +219,8 @@ order by pares DESC]]>
 				<returnValue subreportVariable="sumcostos" toVariable="totalcosto" calculation="Sum"/>
 				<returnValue subreportVariable="sumcostoneto" toVariable="totalneto" calculation="Sum"/>
 				<returnValue subreportVariable="sumutilidad" toVariable="totalutilidad" calculation="Sum"/>
+				<returnValue subreportVariable="sumgastoneto" toVariable="gastoneto"/>
+				<returnValue subreportVariable="sumgastoneto" toVariable="totalgastoneto" calculation="Sum"/>
 				<subreportExpression><![CDATA["C:\\af\\Rentabilidad\\reportes\\headerp.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
@@ -225,24 +236,24 @@ order by pares DESC]]>
 				<textElement textAlignment="Center">
 					<font size="7" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{pares}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{pares}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="236" y="4" width="49" height="10" uuid="86164f1a-bc4f-41e3-8c5f-7635455734f7"/>
+				<reportElement x="232" y="4" width="49" height="10" uuid="86164f1a-bc4f-41e3-8c5f-7635455734f7"/>
 				<textElement textAlignment="Center">
 					<font size="7" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{vtaneta}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="334" y="4" width="49" height="10" uuid="651ef6bf-c453-4c42-8082-73211b2d5fb3"/>
+				<reportElement x="321" y="4" width="46" height="10" uuid="651ef6bf-c453-4c42-8082-73211b2d5fb3"/>
 				<textElement textAlignment="Center">
 					<font size="7" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{costotot}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="432" y="4" width="51" height="10" uuid="530e055a-657e-4b74-8f24-220f6115a81e"/>
+				<reportElement x="442" y="4" width="41" height="10" uuid="530e055a-657e-4b74-8f24-220f6115a81e"/>
 				<textElement textAlignment="Center">
 					<font size="7" isBold="true"/>
 				</textElement>
@@ -276,6 +287,13 @@ order by pares DESC]]>
 				</textElement>
 				<text><![CDATA[Totales :     ]]></text>
 			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="402" y="4" width="40" height="10" uuid="1c5eb04d-fb7d-421c-8493-af40514d9edc"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{gastoneto}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>
@@ -297,46 +315,53 @@ order by pares DESC]]>
 	<summary>
 		<band height="36" splitType="Stretch">
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="337" y="11" width="65" height="20" uuid="953e8f67-0a92-4306-9e92-eefb99d2dc69"/>
+				<reportElement x="321" y="11" width="62" height="20" uuid="953e8f67-0a92-4306-9e92-eefb99d2dc69"/>
 				<textElement textAlignment="Center">
-					<font size="9" isBold="true"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{totalcosto}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="492" y="11" width="62" height="20" uuid="64e20ff3-6551-4ce1-9ae0-ffd76043cdd0"/>
+				<reportElement x="483" y="11" width="49" height="20" uuid="64e20ff3-6551-4ce1-9ae0-ffd76043cdd0"/>
 				<textElement textAlignment="Center">
-					<font size="9" isBold="true"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{totalutilidad}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="235" y="11" width="73" height="20" uuid="96a64351-36f1-4dd4-9861-ded7fe57c0ba"/>
+				<reportElement x="232" y="11" width="53" height="20" uuid="96a64351-36f1-4dd4-9861-ded7fe57c0ba"/>
 				<textElement textAlignment="Center">
-					<font size="9" isBold="true"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{totalvta}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="64" y="11" width="100" height="20" uuid="acc3bb43-aa75-48c1-b22c-6c72935c0b3c"/>
 				<textElement>
-					<font isBold="true"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total de reporte: ]]></text>
 			</staticText>
 			<textField pattern="#,##0.00" isBlankWhenNull="true">
-				<reportElement x="431" y="11" width="51" height="20" uuid="2de5fa09-914c-48bd-a4ed-af43b0544eeb"/>
+				<reportElement x="442" y="11" width="40" height="20" uuid="2de5fa09-914c-48bd-a4ed-af43b0544eeb"/>
 				<textElement textAlignment="Center">
-					<font size="9" isBold="true"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{totalneto}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0" isBlankWhenNull="true">
-				<reportElement x="164" y="11" width="61" height="20" uuid="49be7e57-8920-44df-8b7d-6406f4d11cb8"/>
+				<reportElement x="164" y="11" width="44" height="20" uuid="49be7e57-8920-44df-8b7d-6406f4d11cb8"/>
 				<textElement textAlignment="Center">
-					<font size="9" isBold="true"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{pares_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="402" y="11" width="40" height="20" uuid="3211304b-efaf-4870-8d57-477327937145"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalgastoneto}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

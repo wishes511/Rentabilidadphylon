@@ -46,6 +46,7 @@ where (f.estatus='F') and  L.Descripcion=$P{linea} and year(df.fecha)=year($P{f1
 	<variable name="gastoso" class="java.lang.Float" calculation="Sum"/>
 	<variable name="costnetoso" class="java.lang.Float" calculation="Sum"/>
 	<variable name="utilidadeso" class="java.lang.Float" calculation="Sum"/>
+	<variable name="gastoneto" class="java.lang.Float" calculation="Sum"/>
 	<detail>
 		<band splitType="Stretch">
 			<subreport>
@@ -132,6 +133,7 @@ where (f.estatus='F') and  L.Descripcion=$P{linea} and year(df.fecha)=year($P{f1
 				<returnValue subreportVariable="costotaleso" toVariable="costotalso" calculation="Sum"/>
 				<returnValue subreportVariable="costonetoso" toVariable="costnetoso" calculation="Sum"/>
 				<returnValue subreportVariable="utilidadso" toVariable="utilidadeso" calculation="Sum"/>
+				<returnValue subreportVariable="gastoneto" toVariable="gastoneto" calculation="Sum"/>
 				<subreportExpression><![CDATA["C:/af/Rentabilidad/reportes/body_p_l.jasper"]]></subreportExpression>
 			</subreport>
 		</band>

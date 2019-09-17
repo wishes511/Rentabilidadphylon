@@ -32,8 +32,13 @@
 	</parameter>
 	<queryString>
 		<![CDATA[--- subreporte pares por punto y corrida v2
- select c15 = case when (dp.corrida =90 and cost.punto=15) THEN SUM(cant1)
-  when dp.corrida=90 and cost.punto=16 then SUM(cant3)
+ select c15 = case when (dp.corrida =80 and cost.punto=10) THEN SUM(cant1+cant2) 
+when (dp.corrida =80 and cost.punto=11) THEN SUM(cant3+cant4)
+when (dp.corrida =80 and cost.punto=12) THEN SUM(cant5+cant6)
+when (dp.corrida =81 and cost.punto=13) THEN SUM(cant1+cant2)
+when (dp.corrida =81 and cost.punto=14) THEN SUM(cant3+cant4)
+when (dp.corrida =90 and cost.punto=15) THEN SUM(cant1) when (dp.corrida =81 and cost.punto=15) THEN SUM(cant5+cant6)
+  when dp.corrida=90 and cost.punto=16 then SUM(cant3) when (dp.corrida =81 and cost.punto=16) THEN SUM(cant7+cant8)
   when dp.corrida=90 and cost.punto=17 then sum(cant5) when dp.corrida=97 and cost.punto=17 then SUM(cant1) 
   when dp.corrida=91 and cost.punto=18 then sum(cant1) when dp.corrida=97 and cost.punto=18 then SUM(cant3) 
   when dp.corrida=91 and cost.punto=19 then sum(cant3) when dp.corrida=97 and cost.punto=19 then SUM(cant5)
@@ -44,9 +49,9 @@
   when dp.corrida=92 and cost.punto=24 then sum(cant5) when dp.corrida=93 and cost.punto=24 then SUM(cant5) when dp.corrida=95 and cost.punto=24 then SUM(cant7) when dp.corrida=98 then SUM(cant3)  
   when dp.corrida=93 and cost.punto=25 then SUM(cant7) when dp.corrida=95 and cost.punto=25 then SUM(cant9) when dp.corrida=98 and cost.punto=25 then SUM(cant5) when dp.corrida=94 and cost.punto=25 then SUM(cant1) 
   when dp.corrida=93 and cost.punto=26 then SUM(cant9) when dp.corrida=94 and cost.punto=26 then SUM(cant3) when dp.corrida=98 and cost.punto=26 then SUM(cant7)
-  when dp.corrida=94 and cost.punto=27 then SUM(cant5) when dp.corrida=98 and cost.punto=27 then SUM(cant9) 
-  when dp.corrida=94 and cost.punto=28 then SUM(cant7)  
-  when dp.corrida=94 and cost.punto=29 then SUM(cant9)  
+  when dp.corrida=94 and cost.punto=27 then SUM(cant5) when dp.corrida=98 and cost.punto=27 then SUM(cant9) when (dp.corrida =82 and cost.punto=27) THEN SUM(cant1+cant2)
+  when dp.corrida=94 and cost.punto=28 then SUM(cant7) when (dp.corrida =82 and cost.punto=28) THEN SUM(cant3+cant4)  
+  when dp.corrida=94 and cost.punto=29 then SUM(cant9) when (dp.corrida =82 and cost.punto=29) THEN SUM(cant5+cant6)
   when dp.corrida=94 and cost.punto=30 then SUM(cant11) when dp.corrida=96 then SUM(cant1)
   when dp.corrida=96 and cost.punto=31 then SUM(cant3)  
   when dp.corrida=96 and cost.punto=32 then SUM(cant5)  

@@ -331,7 +331,7 @@ public class Reporte extends javax.swing.JInternalFrame implements Runnable{
             parametross.put("f2", df.format(f2.getDate()));
             parametross.put("nombre", nombre);
             Producto pdb = new Producto();
-            //System.out.println(tipo+tiporeporte);    
+            System.out.println(tipo+tiporeporte);    
             jp1.setVisible(true);
             loading.setVisible(true);
             
